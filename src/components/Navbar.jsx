@@ -1,0 +1,161 @@
+import React from 'react';
+import { Sparkles, BookOpen, Calculator, Layers, Zap, Brain, Activity, Crown } from 'lucide-react';
+
+export function Navbar({ activeTab, setActiveTab, userCredits, onOpenPricing, onOpenBlueprint }) {
+  return (
+    <header className="sticky top-0 z-50 bg-slate-950/85 backdrop-blur-2xl border-b border-slate-800/80">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        
+        {/* Logo & Brand */}
+        <div className="flex items-center gap-3 cursor-pointer shrink-0" onClick={() => setActiveTab('landing')}>
+          <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/25 ring-1 ring-white/20">
+            <Sparkles className="w-6 h-6 text-white animate-pulse" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-black text-xl tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">
+                OmniAI Ecosystem
+              </span>
+              <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                AUTONOMOUS
+              </span>
+            </div>
+            <p className="text-[11px] text-slate-400 font-medium hidden sm:block">
+              منظومة الذكاء الاصطناعي الشاملة والمتطورة ذاتياً
+            </p>
+          </div>
+        </div>
+
+        {/* Navigation Tabs */}
+        <nav className="hidden xl:flex items-center gap-1 bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800 shadow-inner">
+          <button
+            onClick={() => setActiveTab('landing')}
+            className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+              activeTab === 'landing'
+                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30'
+                : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+            }`}
+          >
+            <Layers className="w-4 h-4" />
+            الرئيسية
+          </button>
+
+          <button
+            onClick={() => setActiveTab('incubator')}
+            className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+              activeTab === 'incubator'
+                ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md shadow-purple-600/30'
+                : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+            }`}
+          >
+            <Brain className="w-4 h-4 text-amber-300 animate-pulse" />
+            مسرّعة أفكار المشاريع
+            <span className="px-1.5 py-0.2 text-[9px] bg-amber-500/20 text-amber-300 rounded font-bold">
+              مجلس الإدارة
+            </span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('evolution')}
+            className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+              activeTab === 'evolution'
+                ? 'bg-amber-600 text-white shadow-md shadow-amber-600/30'
+                : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+            }`}
+          >
+            <Activity className="w-4 h-4 text-amber-400" />
+            البحث والتطوير الذاتي
+          </button>
+
+          <button
+            onClick={() => setActiveTab('playground')}
+            className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+              activeTab === 'playground'
+                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30'
+                : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+            }`}
+          >
+            <Zap className="w-4 h-4 text-cyan-400" />
+            استوديو الأدوات
+          </button>
+
+          <button
+            onClick={() => setActiveTab('calculator')}
+            className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+              activeTab === 'calculator'
+                ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30'
+                : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+            }`}
+          >
+            <Calculator className="w-4 h-4 text-emerald-400" />
+            حاسبة MRR
+          </button>
+        </nav>
+
+        {/* User Credits & CTA */}
+        <div className="flex items-center gap-3">
+          {/* Credit balance display */}
+          <div className="flex items-center gap-2 px-3.5 py-1.5 bg-slate-900/90 border border-slate-800 rounded-xl">
+            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+            <div className="text-right">
+              <div className="text-[10px] text-slate-400">رصيد النقاط</div>
+              <div className="text-xs font-bold text-emerald-400 font-mono">{userCredits} نقطة</div>
+            </div>
+          </div>
+
+          <button
+            onClick={onOpenPricing}
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-extrabold text-xs sm:text-sm shadow-lg shadow-indigo-600/25 transition-all cursor-pointer transform active:scale-95"
+          >
+            <Crown className="w-4 h-4 text-amber-300" />
+            <span>الباقات</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Sub-Navigation */}
+      <div className="xl:hidden px-4 pb-3 flex items-center gap-1.5 overflow-x-auto scrollbar-none border-t border-slate-800/60 pt-2">
+        <button
+          onClick={() => setActiveTab('landing')}
+          className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap ${
+            activeTab === 'landing' ? 'bg-indigo-600 text-white' : 'text-slate-400 bg-slate-900'
+          }`}
+        >
+          الرئيسية
+        </button>
+        <button
+          onClick={() => setActiveTab('incubator')}
+          className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap ${
+            activeTab === 'incubator' ? 'bg-purple-600 text-white' : 'text-slate-400 bg-slate-900'
+          }`}
+        >
+          مسرّعة أفكار المشاريع 🚀
+        </button>
+        <button
+          onClick={() => setActiveTab('evolution')}
+          className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap ${
+            activeTab === 'evolution' ? 'bg-amber-600 text-white' : 'text-slate-400 bg-slate-900'
+          }`}
+        >
+          التطور الذاتي 🔮
+        </button>
+        <button
+          onClick={() => setActiveTab('playground')}
+          className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap ${
+            activeTab === 'playground' ? 'bg-indigo-600 text-white' : 'text-slate-400 bg-slate-900'
+          }`}
+        >
+          استوديو الأدوات
+        </button>
+        <button
+          onClick={() => setActiveTab('calculator')}
+          className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap ${
+            activeTab === 'calculator' ? 'bg-indigo-600 text-white' : 'text-slate-400 bg-slate-900'
+          }`}
+        >
+          حاسبة الأرباح
+        </button>
+      </div>
+    </header>
+  );
+}

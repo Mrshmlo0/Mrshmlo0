@@ -1,0 +1,34 @@
+{
+  "name": "mrshmlo0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mrshmlo0/Mrshmlo0.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mrshmlo0/Mrshmlo0/issues"
+  },
+  "homepage": "https://github.com/Mrshmlo0/Mrshmlo0#readme",
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "canvas-confetti": "^1.9.4",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.39.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.2.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.1"
+  },
+  "type": "module"
+}
