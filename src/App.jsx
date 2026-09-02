@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { AllServicesCatalog } from './components/AllServicesCatalog';
 import { AutonomousProjectIncubator } from './components/AutonomousProjectIncubator';
 import { SelfEvolutionEngine } from './components/SelfEvolutionEngine';
-import { ServicesGrid } from './components/ServicesGrid';
 import { InteractivePlayground } from './components/InteractivePlayground';
 import { PricingSection } from './components/PricingSection';
 import { RevenueCalculator } from './components/RevenueCalculator';
@@ -12,8 +12,8 @@ import { BlueprintModal } from './components/BlueprintModal';
 import { Footer } from './components/Footer';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('landing'); // 'landing' | 'incubator' | 'evolution' | 'playground' | 'calculator'
-  const [userCredits, setUserCredits] = useState(150); // Starting trial credits
+  const [activeTab, setActiveTab] = useState('landing'); // 'landing' | 'services-catalog' | 'incubator' | 'evolution' | 'playground' | 'calculator'
+  const [userCredits, setUserCredits] = useState(250); // Generous starting credits
   const [selectedTool, setSelectedTool] = useState('copywriter');
   const [blueprintOpen, setBlueprintOpen] = useState(false);
   const [blueprintSection, setBlueprintSection] = useState('overview');
@@ -21,12 +21,6 @@ export default function App() {
   const handleOpenBlueprint = (sectionId = 'overview') => {
     setBlueprintSection(sectionId);
     setBlueprintOpen(true);
-  };
-
-  const handleSelectToolFromGrid = (toolId) => {
-    setSelectedTool(toolId);
-    setActiveTab('playground');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleSelectPlan = (plan) => {
@@ -63,9 +57,14 @@ export default function App() {
           <>
             <Hero
               onExploreIncubator={() => setActiveTab('incubator')}
-              onExploreServices={() => setActiveTab('playground')}
+              onExploreServices={() => setActiveTab('services-catalog')}
               onOpenCalculator={() => setActiveTab('calculator')}
               onOpenBlueprint={handleOpenBlueprint}
+            />
+            <AllServicesCatalog
+              userCredits={userCredits}
+              setUserCredits={setUserCredits}
+              onOpenPricing={scrollToPricing}
             />
             <AutonomousProjectIncubator
               userCredits={userCredits}
@@ -73,10 +72,6 @@ export default function App() {
               onOpenPricing={scrollToPricing}
             />
             <SelfEvolutionEngine />
-            <ServicesGrid
-              onSelectTool={handleSelectToolFromGrid}
-              onOpenBlueprint={handleOpenBlueprint}
-            />
             <RevenueCalculator
               onOpenBlueprint={handleOpenBlueprint}
             />
@@ -88,16 +83,30 @@ export default function App() {
           </>
         )}
 
+        {activeTab === 'services-catalog' && (
+          <div className="pt-4">
+            <AllServicesCatalog
+              userCredits={userCredits}
+              setUserCredits={setUserCredits}
+              onOpenPricing={scrollToPricing}
+            />
+          </div>
+        )}
+
         {activeTab === 'incubator' && (
-          <AutonomousProjectIncubator
-            userCredits={userCredits}
-            setUserCredits={setUserCredits}
-            onOpenPricing={scrollToPricing}
-          />
+          <div className="pt-4">
+            <AutonomousProjectIncubator
+              userCredits={userCredits}
+              setUserCredits={setUserCredits}
+              onOpenPricing={scrollToPricing}
+            />
+          </div>
         )}
 
         {activeTab === 'evolution' && (
-          <SelfEvolutionEngine />
+          <div className="pt-4">
+            <SelfEvolutionEngine />
+          </div>
         )}
 
         {activeTab === 'playground' && (
