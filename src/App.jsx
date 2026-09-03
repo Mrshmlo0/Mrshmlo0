@@ -10,6 +10,7 @@ import { TechStackSection } from './components/TechStackSection';
 import { BlueprintModal } from './components/BlueprintModal';
 import { MobileAppGuideModal } from './components/MobileAppGuideModal';
 import { FounderAdminModal } from './components/FounderAdminModal';
+import { AuthModal } from './components/AuthModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { Footer } from './components/Footer';
 
@@ -17,10 +18,19 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('landing'); // 'landing' | 'services-catalog' | 'incubator' | 'evolution'
   const [deviceMode, setDeviceMode] = useState('desktop'); // 'desktop' | 'iphone' | 'android'
   const [userCredits, setUserCredits] = useState(300);
+  const [currentUser, setCurrentUser] = useState({
+    name: 'المشترك التجريبي',
+    email: 'user@omniai.com',
+    role: 'customer',
+    plan: 'باقة البداية (Starter)',
+    isLoggedIn: false
+  });
+
   const [blueprintOpen, setBlueprintOpen] = useState(false);
   const [blueprintSection, setBlueprintSection] = useState('overview');
   const [mobileGuideOpen, setMobileGuideOpen] = useState(false);
   const [founderHubOpen, setFounderHubOpen] = useState(false);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
 
   const handleOpenBlueprint = (sectionId = 'overview') => {
     setBlueprintSection(sectionId);
@@ -43,6 +53,15 @@ export default function App() {
     }
   };
 
+  // Require PIN verification if not already logged in as Owner
+  const handleFounderHubClick = () => {
+    if (currentUser.role === 'owner') {
+      setFounderHubOpen(true);
+    } else {
+      setAuthModalOpen(true);
+    }
+  };
+
   const renderMainContent = () => (
     <>
       {activeTab === 'landing' && (
@@ -50,7 +69,7 @@ export default function App() {
           <Hero
             onExploreIncubator={() => setActiveTab('incubator')}
             onExploreServices={() => setActiveTab('services-catalog')}
-            onOpenCalculator={() => setFounderHubOpen(true)}
+            onOpenCalculator={handleFounderHubClick}
             onOpenBlueprint={handleOpenBlueprint}
           />
           <AllServicesCatalog
@@ -115,8 +134,10 @@ export default function App() {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         userCredits={userCredits}
+        currentUser={currentUser}
         onOpenPricing={scrollToPricing}
-        onOpenFounderHub={() => setFounderHubOpen(true)}
+        onOpenFounderHub={handleFounderHubClick}
+        onOpenAuth={() => setAuthModalOpen(true)}
       />
 
       {/* Main View Area */}
@@ -163,6 +184,15 @@ export default function App() {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         onOpenPricing={scrollToPricing}
+      />
+
+      {/* User Login & Admin PIN Modal */}
+      <AuthModal
+        isOpen={authModalOpen}
+        onClose={() => setAuthModalOpen(false)}
+        currentUser={currentUser}
+        setCurrentUser={setCurrentUser}
+        onAdminUnlocked={() => setFounderHubOpen(true)}
       />
 
       {/* Founder & Business Secrets Modal */}

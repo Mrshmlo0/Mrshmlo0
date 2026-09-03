@@ -1,7 +1,7 @@
 import React from 'react';
-import { Sparkles, Crown, Grid, Brain, Activity, Layers, ShieldCheck, Zap } from 'lucide-react';
+import { Sparkles, Crown, Grid, Brain, Activity, Layers, ShieldCheck, User, Lock } from 'lucide-react';
 
-export function Navbar({ activeTab, setActiveTab, userCredits, onOpenPricing, onOpenFounderHub }) {
+export function Navbar({ activeTab, setActiveTab, userCredits, currentUser, onOpenPricing, onOpenFounderHub, onOpenAuth }) {
   return (
     <header className="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-2xl border-b border-slate-800/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
@@ -80,8 +80,8 @@ export function Navbar({ activeTab, setActiveTab, userCredits, onOpenPricing, on
           </button>
         </nav>
 
-        {/* User Credits, Founder Hub & Pricing CTA */}
-        <div className="flex items-center gap-2.5">
+        {/* User Credits, Auth, Founder Hub & Pricing CTA */}
+        <div className="flex items-center gap-2">
           {/* Credit balance display */}
           <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-xl">
             <div className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
@@ -91,23 +91,33 @@ export function Navbar({ activeTab, setActiveTab, userCredits, onOpenPricing, on
             </div>
           </div>
 
+          {/* User Account / Auth Button */}
           <button
-            onClick={onOpenPricing}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition-all border border-slate-700 cursor-pointer"
+            onClick={onOpenAuth}
+            className="p-2 sm:px-3 sm:py-2 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white text-xs font-bold rounded-xl border border-slate-800 flex items-center gap-1.5 transition-colors cursor-pointer"
+            title="حساب المشترك"
           >
-            <Crown className="w-3.5 h-3.5 text-amber-300" />
-            <span>الباقات</span>
+            <User className="w-4 h-4 text-indigo-400" />
+            <span className="hidden sm:inline">{currentUser?.name ? currentUser.name.split(' ')[0] : 'تسجيل الدخول'}</span>
           </button>
 
-          {/* Owner/Founder Hub Button */}
+          <button
+            onClick={onOpenPricing}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition-all border border-slate-700 cursor-pointer"
+          >
+            <Crown className="w-3.5 h-3.5 text-amber-300" />
+            <span className="hidden sm:inline">الباقات</span>
+          </button>
+
+          {/* Owner/Founder Hub Button (Protected by PIN) */}
           <button
             onClick={onOpenFounderHub}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white font-black text-xs shadow-lg shadow-amber-600/30 transition-all cursor-pointer transform active:scale-95"
-            title="لوحة تحكم خاصة بصاحب المشروع"
+            className="flex items-center gap-1 px-3 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white font-black text-xs shadow-lg shadow-amber-600/30 transition-all cursor-pointer transform active:scale-95"
+            title="لوحة تحكم خاصة بصاحب المشروع (محمية برمز سري)"
           >
-            <ShieldCheck className="w-4 h-4 text-amber-200" />
-            <span className="hidden sm:inline">لوحة صاحب المشروع 👑</span>
-            <span className="sm:hidden">الإدارة 👑</span>
+            <Lock className="w-3.5 h-3.5 text-amber-200" />
+            <span className="hidden sm:inline">لوحة المالك 👑</span>
+            <span className="sm:hidden">المالك 👑</span>
           </button>
         </div>
       </div>

@@ -13,26 +13,37 @@ import {
   Share2,
   Wand2,
   Star,
-  Image as ImageIcon
+  Image as ImageIcon,
+  CheckCircle2,
+  Layers
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { executeUniversalService } from '../data/allServicesData';
+import { copyToClipboardSafe, downloadTextFileSafe } from '../utils/clipboardAndDownload';
+import { RealImageGenerator } from './RealImageGenerator';
 
 export function UnifiedServiceModal({ service, isOpen, onClose, userCredits, setUserCredits, onOpenPricing }) {
   const [formData, setFormData] = useState({});
   const [speedMode, setSpeedMode] = useState('turbo'); // 'turbo' | 'precision'
+  const [selectedVariant, setSelectedVariant] = useState(0); // 0 | 1 | 2
   const [isGenerating, setIsGenerating] = useState(false);
   const [generationResult, setGenerationResult] = useState(null);
   const [copied, setCopied] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [notification, setNotification] = useState(null);
 
   if (!isOpen || !service) return null;
+
+  const showToast = (msg) => {
+    setNotification(msg);
+    setTimeout(() => setNotification(null), 3000);
+  };
 
   const handleInputChange = (fieldKey, value) => {
     setFormData((prev) => ({ ...prev, [fieldKey]: value }));
   };
 
-  const cost = parseInt(service.tokensCost) || 15;
+  const cost = parseInt(service.tokensCost) || 10;
 
   const handleExecute = (e) => {
     e?.preventDefault();
@@ -45,7 +56,7 @@ export function UnifiedServiceModal({ service, isOpen, onClose, userCredits, set
     setUserCredits((prev) => Math.max(0, prev - cost));
     setIsGenerating(true);
 
-    const delay = speedMode === 'turbo' ? 400 : 800;
+    const delay = speedMode === 'turbo' ? 350 : 750;
 
     setTimeout(() => {
       const res = executeUniversalService({
@@ -54,7 +65,8 @@ export function UnifiedServiceModal({ service, isOpen, onClose, userCredits, set
       });
       setGenerationResult(res);
       setIsGenerating(false);
-      confetti({ particleCount: 50, spread: 65, origin: { y: 0.7 } });
+      confetti({ particleCount: 45, spread: 60, origin: { y: 0.7 } });
+      showToast('✨ تم التوليد بنجاح وجاهز للاستخدام الفوري!');
     }, delay);
   };
 
@@ -62,29 +74,41 @@ export function UnifiedServiceModal({ service, isOpen, onClose, userCredits, set
     if (!generationResult) return;
     const out = generationResult.output;
     const textToCopy = `${out.title}\n\n${out.primaryHook}\n\n${out.fullContent}\n\n${out.callToAction}\n\n${out.hashtags}`;
-    navigator.clipboard.writeText(textToCopy);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    copyToClipboardSafe(
+      textToCopy,
+      () => {
+        setCopied(true);
+        showToast('📋 تم نسخ النص بالكامل إلى الحافظة بنجاح!');
+        setTimeout(() => setCopied(false), 2500);
+      },
+      () => showToast('⚠️ تعذر النسخ التلقائي، يرجى تظليل النص ونسخه يدوياً.')
+    );
   };
 
   const downloadTextFile = () => {
     if (!generationResult) return;
     const out = generationResult.output;
-    const text = `${out.title}\n\n${out.primaryHook}\n\n${out.fullContent}\n\n${out.callToAction}\n\n${out.hashtags}\n\n---\nتم التوليد بنجاح عبر منصة OmniAI`;
-    const element = document.createElement("a");
-    const file = new Blob([text], { type: 'text/plain;charset=utf-8' });
-    element.href = URL.createObjectURL(file);
-    element.download = `${service.id}-deliverable.txt`;
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
+    const text = `${out.title}\n\n${out.primaryHook}\n\n${out.fullContent}\n\n${out.callToAction}\n\n${out.hashtags}\n\n---\nتم التوليد بنجاح عبر منصة OmniAI Enterprise`;
+    const success = downloadTextFileSafe(`${service.id}-deliverable.txt`, text);
+    if (success) {
+      showToast('📥 تم تحميل الملف النصي إلى جهازك بنجاح!');
+    }
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/85 backdrop-blur-2xl animate-fadeIn">
+      
+      {/* Toast Notification */}
+      {notification && (
+        <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900 border border-emerald-500/60 text-white px-5 py-2.5 rounded-2xl shadow-2xl backdrop-blur-xl flex items-center gap-2 text-xs sm:text-sm font-bold animate-bounce">
+          <Sparkles className="w-4 h-4 text-emerald-400" />
+          <span>{notification}</span>
+        </div>
+      )}
+
       <div className="relative w-full max-w-5xl max-h-[92vh] bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl flex flex-col overflow-hidden">
         
-        {/* Top Modal Header - Clean Customer Facing */}
+        {/* Top Modal Header */}
         <div className="p-5 sm:p-6 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-3.5">
             <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-600/30 shrink-0">
@@ -103,7 +127,10 @@ export function UnifiedServiceModal({ service, isOpen, onClose, userCredits, set
 
           <div className="flex items-center gap-2">
             <button
-              onClick={() => setIsFavorite(!isFavorite)}
+              onClick={() => {
+                setIsFavorite(!isFavorite);
+                showToast(isFavorite ? 'تمت الإزالة من المفضلة' : '⭐ تمت الإضافة إلى المفضلة!');
+              }}
               className={`p-2 rounded-xl border transition-colors cursor-pointer ${
                 isFavorite
                   ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
@@ -234,6 +261,7 @@ export function UnifiedServiceModal({ service, isOpen, onClose, userCredits, set
                     <button
                       onClick={copyFullOutput}
                       className="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-indigo-300 text-xs font-bold rounded-xl border border-slate-800 flex items-center gap-1 cursor-pointer transition-colors"
+                      title="نسخ النص كاملاً"
                     >
                       {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                       <span>{copied ? 'تم النسخ!' : 'نسخ النص'}</span>
@@ -241,40 +269,29 @@ export function UnifiedServiceModal({ service, isOpen, onClose, userCredits, set
 
                     <button
                       onClick={downloadTextFile}
-                      className="p-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white text-xs font-bold rounded-xl border border-slate-800 cursor-pointer transition-colors"
+                      className="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white text-xs font-bold rounded-xl border border-slate-800 flex items-center gap-1 cursor-pointer transition-colors"
                       title="تحميل كملف نصي"
                     >
-                      <Download className="w-4 h-4" />
+                      <Download className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline">تحميل .TXT</span>
                     </button>
                   </div>
                 )}
               </div>
 
-              {generationResult ? (
+              {/* Real Image Generator Render */}
+              {service.id === 'midjourney-prompts' ? (
+                <RealImageGenerator
+                  concept={formData.visualConcept || "زجاجة عطر فاخرة تتلألأ فوق رمال الصحراء الذهبية وقت الغروب"}
+                  artStyle={formData.artStyle || "تصوير فوتوغرافي واقعي وسينمائي (Hyper-realistic 8K)"}
+                />
+              ) : generationResult ? (
                 <div className="space-y-4 animate-fadeIn text-xs sm:text-sm">
                   {/* Primary Hook Banner */}
                   <div className="p-3.5 bg-slate-900 rounded-2xl border border-indigo-500/20">
                     <span className="text-xs font-bold text-indigo-400 block mb-1">⚡ الملخص والعنوان التنفيذي:</span>
                     <p className="font-bold text-white leading-relaxed">{generationResult.output.primaryHook}</p>
                   </div>
-
-                  {/* Midjourney Visual Mockup Preview Card */}
-                  {service.id === 'midjourney-prompts' && (
-                    <div className="p-4 rounded-2xl bg-gradient-to-r from-purple-950/50 via-slate-900 to-indigo-950/50 border border-purple-500/30 flex items-center gap-4">
-                      <div className="w-14 h-14 rounded-xl bg-purple-600/20 border border-purple-500/40 flex items-center justify-center text-purple-300 shrink-0">
-                        <ImageIcon className="w-7 h-7" />
-                      </div>
-                      <div className="text-xs">
-                        <div className="font-bold text-white flex items-center gap-1.5">
-                          <span>معاينة هندسة الصورة (Midjourney v6 Ready)</span>
-                          <span className="px-1.5 py-0.2 bg-emerald-500/20 text-emerald-300 rounded text-[10px] font-mono">8K UHD</span>
-                        </div>
-                        <p className="text-slate-400 mt-0.5">
-                          تم توليد الإضاءة السينمائية (Cinematic Rim Lighting) وزوايا الكاميرا المتقدمة بالأبعاد 16:9 بدقة فائقة.
-                        </p>
-                      </div>
-                    </div>
-                  )}
 
                   {/* Full Detailed Deliverable */}
                   <div className="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 max-h-72 overflow-y-auto scrollbar-thin">
