@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
-<<<<<<< HEAD
-=======
 import { DeviceSimulatorBar } from './components/DeviceSimulatorBar';
->>>>>>> 5764cc2 (feat: complete full mobile app Android/iOS PWA support, deep generative engine for 24 services, and mobile deployment guide)
 import { Hero } from './components/Hero';
 import { AllServicesCatalog } from './components/AllServicesCatalog';
 import { AutonomousProjectIncubator } from './components/AutonomousProjectIncubator';
@@ -13,28 +10,18 @@ import { PricingSection } from './components/PricingSection';
 import { RevenueCalculator } from './components/RevenueCalculator';
 import { TechStackSection } from './components/TechStackSection';
 import { BlueprintModal } from './components/BlueprintModal';
-<<<<<<< HEAD
-=======
 import { MobileAppGuideModal } from './components/MobileAppGuideModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
->>>>>>> 5764cc2 (feat: complete full mobile app Android/iOS PWA support, deep generative engine for 24 services, and mobile deployment guide)
 import { Footer } from './components/Footer';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('landing'); // 'landing' | 'services-catalog' | 'incubator' | 'evolution' | 'playground' | 'calculator'
-<<<<<<< HEAD
-  const [userCredits, setUserCredits] = useState(250); // Generous starting credits
-  const [selectedTool, setSelectedTool] = useState('copywriter');
-  const [blueprintOpen, setBlueprintOpen] = useState(false);
-  const [blueprintSection, setBlueprintSection] = useState('overview');
-=======
   const [deviceMode, setDeviceMode] = useState('desktop'); // 'desktop' | 'iphone' | 'android'
   const [userCredits, setUserCredits] = useState(300); // Generous credits
   const [selectedTool, setSelectedTool] = useState('copywriter');
   const [blueprintOpen, setBlueprintOpen] = useState(false);
   const [blueprintSection, setBlueprintSection] = useState('overview');
   const [mobileGuideOpen, setMobileGuideOpen] = useState(false);
->>>>>>> 5764cc2 (feat: complete full mobile app Android/iOS PWA support, deep generative engine for 24 services, and mobile deployment guide)
 
   const handleOpenBlueprint = (sectionId = 'overview') => {
     setBlueprintSection(sectionId);
@@ -57,11 +44,6 @@ export default function App() {
     }
   };
 
-<<<<<<< HEAD
-  return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-indigo-500 selection:text-white">
-      
-=======
   const renderMainContent = () => (
     <>
       {activeTab === 'landing' && (
@@ -151,7 +133,6 @@ export default function App() {
         onOpenMobileGuide={() => setMobileGuideOpen(true)}
       />
 
->>>>>>> 5764cc2 (feat: complete full mobile app Android/iOS PWA support, deep generative engine for 24 services, and mobile deployment guide)
       {/* Navigation */}
       <Navbar
         activeTab={activeTab}
@@ -161,82 +142,6 @@ export default function App() {
         onOpenBlueprint={handleOpenBlueprint}
       />
 
-<<<<<<< HEAD
-      {/* Main View Area */}
-      <main className="flex-1">
-        {activeTab === 'landing' && (
-          <>
-            <Hero
-              onExploreIncubator={() => setActiveTab('incubator')}
-              onExploreServices={() => setActiveTab('services-catalog')}
-              onOpenCalculator={() => setActiveTab('calculator')}
-              onOpenBlueprint={handleOpenBlueprint}
-            />
-            <AllServicesCatalog
-              userCredits={userCredits}
-              setUserCredits={setUserCredits}
-              onOpenPricing={scrollToPricing}
-            />
-            <AutonomousProjectIncubator
-              userCredits={userCredits}
-              setUserCredits={setUserCredits}
-              onOpenPricing={scrollToPricing}
-            />
-            <SelfEvolutionEngine />
-            <RevenueCalculator
-              onOpenBlueprint={handleOpenBlueprint}
-            />
-            <PricingSection
-              onSelectPlan={handleSelectPlan}
-              onOpenBlueprint={handleOpenBlueprint}
-            />
-            <TechStackSection />
-          </>
-        )}
-
-        {activeTab === 'services-catalog' && (
-          <div className="pt-4">
-            <AllServicesCatalog
-              userCredits={userCredits}
-              setUserCredits={setUserCredits}
-              onOpenPricing={scrollToPricing}
-            />
-          </div>
-        )}
-
-        {activeTab === 'incubator' && (
-          <div className="pt-4">
-            <AutonomousProjectIncubator
-              userCredits={userCredits}
-              setUserCredits={setUserCredits}
-              onOpenPricing={scrollToPricing}
-            />
-          </div>
-        )}
-
-        {activeTab === 'evolution' && (
-          <div className="pt-4">
-            <SelfEvolutionEngine />
-          </div>
-        )}
-
-        {activeTab === 'playground' && (
-          <InteractivePlayground
-            initialTool={selectedTool}
-            userCredits={userCredits}
-            setUserCredits={setUserCredits}
-            onOpenPricing={scrollToPricing}
-          />
-        )}
-
-        {activeTab === 'calculator' && (
-          <div className="pt-8">
-            <RevenueCalculator onOpenBlueprint={handleOpenBlueprint} />
-            <PricingSection
-              onSelectPlan={handleSelectPlan}
-              onOpenBlueprint={handleOpenBlueprint}
-            />
-=======
       {/* Main View Area (Desktop vs Phone Mockup Container) */}
       <main className="flex-1 pb-16 xl:pb-0">
         {deviceMode === 'desktop' ? (
@@ -272,13 +177,10 @@ export default function App() {
                 onOpenPricing={scrollToPricing}
               />
             </div>
->>>>>>> 5764cc2 (feat: complete full mobile app Android/iOS PWA support, deep generative engine for 24 services, and mobile deployment guide)
           </div>
         )}
       </main>
 
-<<<<<<< HEAD
-=======
       {/* Real Mobile Bottom Navigation (for actual mobile devices) */}
       <MobileBottomNav
         activeTab={activeTab}
@@ -286,7 +188,6 @@ export default function App() {
         onOpenPricing={scrollToPricing}
       />
 
->>>>>>> 5764cc2 (feat: complete full mobile app Android/iOS PWA support, deep generative engine for 24 services, and mobile deployment guide)
       {/* Strategic Master Blueprint Modal */}
       <BlueprintModal
         isOpen={blueprintOpen}
@@ -294,15 +195,12 @@ export default function App() {
         initialSection={blueprintSection}
       />
 
-<<<<<<< HEAD
-=======
       {/* Mobile App Deployment Guide Modal */}
       <MobileAppGuideModal
         isOpen={mobileGuideOpen}
         onClose={() => setMobileGuideOpen(false)}
       />
 
->>>>>>> 5764cc2 (feat: complete full mobile app Android/iOS PWA support, deep generative engine for 24 services, and mobile deployment guide)
       {/* Footer */}
       <Footer
         onOpenBlueprint={handleOpenBlueprint}
