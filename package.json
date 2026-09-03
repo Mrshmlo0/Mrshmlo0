@@ -4,7 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "test": "echo \"Error: no test specified\" && exit 1"
+=======
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "vite build",
+    "dev": "vite"
+>>>>>>> 5764cc2 (feat: complete full mobile app Android/iOS PWA support, deep generative engine for 24 services, and mobile deployment guide)
   },
   "repository": {
     "type": "git",
@@ -21,7 +27,11 @@
     "@tailwindcss/vite": "^4.3.3",
     "canvas-confetti": "^1.9.4",
     "clsx": "^2.1.1",
+<<<<<<< HEAD
     "lucide-react": "^1.39.0",
+=======
+    "lucide-react": "^1.40.0",
+>>>>>>> 5764cc2 (feat: complete full mobile app Android/iOS PWA support, deep generative engine for 24 services, and mobile deployment guide)
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "tailwindcss": "^4.3.3",
