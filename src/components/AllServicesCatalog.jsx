@@ -15,10 +15,8 @@ import {
   Bot,
   Search,
   ArrowLeft,
-  DollarSign,
-  Flame,
-  CheckCircle2,
-  SlidersHorizontal
+  Zap,
+  Star
 } from 'lucide-react';
 import { UnifiedServiceModal } from './UnifiedServiceModal';
 
@@ -59,24 +57,24 @@ export function AllServicesCatalog({ userCredits, setUserCredits, onOpenPricing 
   };
 
   return (
-    <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-12 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       {/* Header */}
-      <div className="text-center max-w-3xl mx-auto mb-14">
+      <div className="text-center max-w-3xl mx-auto mb-12">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-bold border border-indigo-500/20 mb-4 shadow-inner">
           <Sparkles className="w-4 h-4 text-amber-300" />
-          <span>مجمع الخدمات الشامل والأعلى ربحية عالمياً وعربياً</span>
+          <span>منظومة الخدمات الذكية المتكاملة</span>
         </div>
         <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
-          دليل الـ 24 خدمة ذكاء اصطناعي الجاهزة للربح الفوري
+          دليل الـ 24 خدمة ذكاء اصطناعي المتخصصة
         </h2>
-        <p className="mt-4 text-base sm:text-lg text-slate-400 leading-relaxed">
-          جميع الخدمات التي تستطيع نماذج الذكاء الاصطناعي إنتاجها بدقة متناهية وسرعة خارقة، مع هوامش ربح تتراوح بين <strong className="text-emerald-400">85% إلى 95%</strong> جاهزة للدمج والبيع في باقاتك واشتراكاتك.
+        <p className="mt-3 text-sm sm:text-base text-slate-400 leading-relaxed">
+          اختر أي خدمة للبدء الفوري؛ صممت كل أداة لتنتج مخرجات احترافية عميقة ودقيقة بنسبة 100% لتسليمها لعملائك أو استخدامها في مشاريعك.
         </p>
       </div>
 
-      {/* Search Bar & Filters */}
-      <div className="mb-10 space-y-5">
+      {/* Search Bar & Category Filters */}
+      <div className="mb-10 space-y-4">
         
         {/* Search Input */}
         <div className="relative max-w-2xl mx-auto">
@@ -85,8 +83,8 @@ export function AllServicesCatalog({ userCredits, setUserCredits, onOpenPricing 
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="ابحث عن أي خدمة (مثال: سيرة ذاتية، بوت واتساب، مقال سيو، إعلانات، كود، عقود)..."
-            className="w-full bg-slate-900/90 border border-slate-800 rounded-2xl pr-12 pl-4 py-4 text-sm text-white focus:outline-none focus:border-indigo-500 shadow-xl transition-all"
+            placeholder="ابحث عن أي خدمة (مثال: برومبت صور، سيرة ذاتية، بوت واتساب، مقال سيو، إعلانات، كود)..."
+            className="w-full bg-slate-900/90 border border-slate-800 rounded-2xl pr-12 pl-4 py-3.5 text-xs sm:text-sm text-white focus:outline-none focus:border-indigo-500 shadow-xl transition-all"
           />
           {searchQuery && (
             <button
@@ -108,7 +106,7 @@ export function AllServicesCatalog({ userCredits, setUserCredits, onOpenPricing 
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
+                className={`flex items-center gap-2 px-3.5 py-2 rounded-2xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
                   isSelected
                     ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-indigo-600/30'
                     : 'bg-slate-900/80 text-slate-400 hover:text-white hover:bg-slate-800 border border-slate-800'
@@ -131,45 +129,32 @@ export function AllServicesCatalog({ userCredits, setUserCredits, onOpenPricing 
           >
             <div>
               {/* Header Badge */}
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-3">
                 <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
                   {service.badge}
                 </span>
-                <span className="text-xs font-bold text-emerald-400 font-mono">
-                  هامش: {service.profitMargin}
+                <span className="text-[11px] font-bold text-slate-400 font-mono">
+                  {service.tokensCost}
                 </span>
               </div>
 
               {/* Title & Subtitle */}
-              <h3 className="text-lg font-bold text-white mb-1 group-hover:text-indigo-300 transition-colors">
+              <h3 className="text-base sm:text-lg font-bold text-white mb-1 group-hover:text-indigo-300 transition-colors">
                 {service.title}
               </h3>
               <p className="text-[11px] font-mono text-slate-400 mb-3">{service.englishTitle}</p>
 
               {/* Description */}
-              <p className="text-xs text-slate-300 leading-relaxed mb-5">{service.description}</p>
-
-              {/* Pricing & Token Cost Pills */}
-              <div className="bg-slate-950/80 p-3 rounded-2xl border border-slate-800/80 space-y-1.5 text-[11px] mb-5">
-                <div className="flex items-center justify-between">
-                  <span className="text-slate-400 flex items-center gap-1">
-                    <DollarSign className="w-3 h-3 text-amber-400" /> سعر بيع الباقة:
-                  </span>
-                  <span className="text-amber-300 font-bold">{service.pricingGuide}</span>
-                </div>
-                <div className="flex items-center justify-between border-t border-slate-800 pt-1.5">
-                  <span className="text-slate-400">استهلاك الرصيد:</span>
-                  <span className="text-indigo-400 font-mono font-bold">{service.tokensCost}</span>
-                </div>
-              </div>
+              <p className="text-xs text-slate-300 leading-relaxed mb-6">{service.description}</p>
             </div>
 
             {/* Action Button */}
             <button
               onClick={() => handleOpenService(service)}
-              className="w-full py-3 px-4 rounded-xl bg-indigo-600/20 hover:bg-indigo-600 border border-indigo-500/30 hover:border-indigo-500 text-indigo-200 hover:text-white font-bold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer group/btn"
+              className="w-full py-3 px-4 rounded-xl bg-indigo-600/20 hover:bg-indigo-600 border border-indigo-500/30 hover:border-indigo-500 text-indigo-200 hover:text-white font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer group/btn"
             >
-              <span>تشغيل وتجربة الخدمة حياً</span>
+              <Zap className="w-4 h-4 text-amber-300" />
+              <span>تشغيل الأداة وتوليد المخرجات</span>
               <ArrowLeft className="w-4 h-4 group-hover/btn:-translate-x-1 transition-transform" />
             </button>
           </div>

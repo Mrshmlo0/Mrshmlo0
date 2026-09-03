@@ -5,23 +5,22 @@ import { Hero } from './components/Hero';
 import { AllServicesCatalog } from './components/AllServicesCatalog';
 import { AutonomousProjectIncubator } from './components/AutonomousProjectIncubator';
 import { SelfEvolutionEngine } from './components/SelfEvolutionEngine';
-import { InteractivePlayground } from './components/InteractivePlayground';
 import { PricingSection } from './components/PricingSection';
-import { RevenueCalculator } from './components/RevenueCalculator';
 import { TechStackSection } from './components/TechStackSection';
 import { BlueprintModal } from './components/BlueprintModal';
 import { MobileAppGuideModal } from './components/MobileAppGuideModal';
+import { FounderAdminModal } from './components/FounderAdminModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { Footer } from './components/Footer';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('landing'); // 'landing' | 'services-catalog' | 'incubator' | 'evolution' | 'playground' | 'calculator'
+  const [activeTab, setActiveTab] = useState('landing'); // 'landing' | 'services-catalog' | 'incubator' | 'evolution'
   const [deviceMode, setDeviceMode] = useState('desktop'); // 'desktop' | 'iphone' | 'android'
-  const [userCredits, setUserCredits] = useState(300); // Generous credits
-  const [selectedTool, setSelectedTool] = useState('copywriter');
+  const [userCredits, setUserCredits] = useState(300);
   const [blueprintOpen, setBlueprintOpen] = useState(false);
   const [blueprintSection, setBlueprintSection] = useState('overview');
   const [mobileGuideOpen, setMobileGuideOpen] = useState(false);
+  const [founderHubOpen, setFounderHubOpen] = useState(false);
 
   const handleOpenBlueprint = (sectionId = 'overview') => {
     setBlueprintSection(sectionId);
@@ -51,7 +50,7 @@ export default function App() {
           <Hero
             onExploreIncubator={() => setActiveTab('incubator')}
             onExploreServices={() => setActiveTab('services-catalog')}
-            onOpenCalculator={() => setActiveTab('calculator')}
+            onOpenCalculator={() => setFounderHubOpen(true)}
             onOpenBlueprint={handleOpenBlueprint}
           />
           <AllServicesCatalog
@@ -65,9 +64,6 @@ export default function App() {
             onOpenPricing={scrollToPricing}
           />
           <SelfEvolutionEngine />
-          <RevenueCalculator
-            onOpenBlueprint={handleOpenBlueprint}
-          />
           <PricingSection
             onSelectPlan={handleSelectPlan}
             onOpenBlueprint={handleOpenBlueprint}
@@ -101,25 +97,6 @@ export default function App() {
           <SelfEvolutionEngine />
         </div>
       )}
-
-      {activeTab === 'playground' && (
-        <InteractivePlayground
-          initialTool={selectedTool}
-          userCredits={userCredits}
-          setUserCredits={setUserCredits}
-          onOpenPricing={scrollToPricing}
-        />
-      )}
-
-      {activeTab === 'calculator' && (
-        <div className="pt-8">
-          <RevenueCalculator onOpenBlueprint={handleOpenBlueprint} />
-          <PricingSection
-            onSelectPlan={handleSelectPlan}
-            onOpenBlueprint={handleOpenBlueprint}
-          />
-        </div>
-      )}
     </>
   );
 
@@ -139,10 +116,10 @@ export default function App() {
         setActiveTab={setActiveTab}
         userCredits={userCredits}
         onOpenPricing={scrollToPricing}
-        onOpenBlueprint={handleOpenBlueprint}
+        onOpenFounderHub={() => setFounderHubOpen(true)}
       />
 
-      {/* Main View Area (Desktop vs Phone Mockup Container) */}
+      {/* Main View Area */}
       <main className="flex-1 pb-16 xl:pb-0">
         {deviceMode === 'desktop' ? (
           renderMainContent()
@@ -186,6 +163,20 @@ export default function App() {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         onOpenPricing={scrollToPricing}
+      />
+
+      {/* Founder & Business Secrets Modal */}
+      <FounderAdminModal
+        isOpen={founderHubOpen}
+        onClose={() => setFounderHubOpen(false)}
+        onOpenMobileGuide={() => {
+          setFounderHubOpen(false);
+          setMobileGuideOpen(true);
+        }}
+        onOpenBlueprint={(sec) => {
+          setFounderHubOpen(false);
+          handleOpenBlueprint(sec);
+        }}
       />
 
       {/* Strategic Master Blueprint Modal */}

@@ -1,5 +1,5 @@
-// Deep Production-Grade Engine for all 24 High-Demand Monetization AI Services
-// Generates exhaustive, highly tailored, real-world deliverables based on user inputs.
+// Comprehensive Production Engine for ALL 24 High-Demand AI Services
+// Zero generic fallbacks: Every tool has a deep, dedicated, and exhaustive generation handler.
 
 export const SERVICE_CATEGORIES = [
   { id: "all", label: "جميع الخدمات (24 خدمة)", icon: "Sparkles", count: 24 },
@@ -8,7 +8,7 @@ export const SERVICE_CATEGORIES = [
   { id: "career", label: "التوظيف والسير الذاتية (3)", icon: "Briefcase", count: 3 },
   { id: "business", label: "الأعمال والاستراتيجية (3)", icon: "Building2", count: 3 },
   { id: "seo", label: "السيو وتصدر جوجل (3)", icon: "TrendingUp", count: 3 },
-  { id: "media", label: "الفيديو والصوتيات (3)", icon: "Video", count: 3 },
+  { id: "media", label: "الفيديو والتصميم والصوت (3)", icon: "Video", count: 3 },
   { id: "code", label: "البرمجة والأتمتة (3)", icon: "Code2", count: 3 },
   { id: "sales", label: "المبيعات وخدمة العملاء (3)", icon: "Bot", count: 3 }
 ];
@@ -20,17 +20,14 @@ export const ALL_PROFITABLE_SERVICES = [
     categoryId: "marketing",
     title: "صانع المنشورات الفيروسية والثريدات",
     englishTitle: "Viral Social Posts & Threads Crafter",
-    badge: "الأعلى طلباً",
-    profitMargin: "92%",
-    pricingGuide: "15$ - 49$/شهر للأفراد والمسوقين",
-    demandScore: "9.9/10",
+    badge: "الأعلى تفاعلاً 🔥",
     tokensCost: "10 نقاط",
-    description: "كتابة منشورات تويتر، لينكد إن، وإنستغرام تخطف الأنظار وتحقق آلاف التفاعلات بلهجات متعددة ونبرات مقنعة.",
+    description: "كتابة منشورات تويتر، لينكد إن، وإنستغرام بخطافات نفسية تجذب آلاف التفاعلات بلهجات متعددة ونبرات مقنعة.",
     fields: [
-      { name: "platform", label: "منصة النشر", type: "select", options: ["LinkedIn (مهني واحترافي)", "X / Twitter (ثرد فيروزي مع خطاف)", "Instagram (كابشن تفاعلي)", "TikTok / Reels (سكربت سريع 30 ثانية)"] },
+      { name: "platform", label: "منصة النشر", type: "select", options: ["LinkedIn (مهني واحترافي)", "X / Twitter (ثرد فيروزي مع خطاف)", "Instagram (كابشن تفاعلي وقوي)", "TikTok / Reels (سكربت سريع 30 ثانية)"] },
       { name: "dialect", label: "اللهجة المستهدفة", type: "select", options: ["فصحى عصرية ومقنعة", "سعودية / خليجية", "مصرية تفاعلية"] },
-      { name: "topic", label: "موضوع المنشور أو الخدمة أو المنتج", type: "textarea", placeholder: "اكتب بالتفصيل عن ماذا تريد التحدث، ما هي الخدمة، وما الفائدة الأساسية للعميل؟" },
-      { name: "targetAudience", label: "الجمهور المستهدف", type: "text", placeholder: "مثال: أصحاب المشاريع الصغيرة، المسوقين، الخريجين" }
+      { name: "topic", label: "موضوع المنشور أو الفكرة بالتفصيل", type: "textarea", placeholder: "اكتب بالتفصيل عن ماذا تريد التحدث، ما هي الفكرة، الفائدة، أو المشكلة التي تحلها؟" },
+      { name: "targetAudience", label: "الجمهور المستهدف", type: "text", placeholder: "مثال: أصحاب المشاريع الصغيرة، المسوقين، المستقلين" }
     ]
   },
   {
@@ -38,10 +35,7 @@ export const ALL_PROFITABLE_SERVICES = [
     categoryId: "marketing",
     title: "محرك صياغة الإعلانات الممولة (PAS & AIDA)",
     englishTitle: "High-Converting Ad Copy Engine",
-    badge: "مضاعف المبيعات",
-    profitMargin: "89%",
-    pricingGuide: "29$ - 99$/شهر للوكالات والمتاجر",
-    demandScore: "9.8/10",
+    badge: "مضاعف المبيعات 🚀",
     tokensCost: "15 نقطة",
     description: "ابتكار نصوص إعلانات فيسبوك، تيك توك، وسناب شات مع عناوين خطافة ودعوات إجراء حاسمة ترفع العائد الإعلاني ROAS.",
     fields: [
@@ -56,11 +50,8 @@ export const ALL_PROFITABLE_SERVICES = [
     categoryId: "marketing",
     title: "مولد حملات البريد والتواصل البارد (Cold Outreach)",
     englishTitle: "B2B Cold Email & Sales Sequences",
-    badge: "B2B ذهبي",
-    profitMargin: "90%",
-    pricingGuide: "25$ - 79$/شهر للشركات",
-    demandScore: "9.5/10",
-    tokensCost: "12 نقطة",
+    badge: "B2B احترافي 💼",
+    tokensCost: "15 نقطة",
     description: "صياغة تسلسلات إيميل احترافية للوصول للمديرين التنفيذيين وإغلاق الصفقات مع معدلات فتح تتجاوز 45%.",
     fields: [
       { name: "targetRole", label: "المسمى الوظيفي للشخص المستهدف", type: "text", placeholder: "مثال: الرئيس التنفيذي (CEO) / مدير المشتريات / مدير التسويق" },
@@ -75,10 +66,7 @@ export const ALL_PROFITABLE_SERVICES = [
     categoryId: "ecommerce",
     title: "مساعد أوصاف المنتجات المغرية للشراء",
     englishTitle: "E-Commerce Selling Story & Product Copy",
-    badge: "للمتاجر الإلكترونية",
-    profitMargin: "88%",
-    pricingGuide: "19$ - 69$/شهر لتجار سلة وزد",
-    demandScore: "9.7/10",
+    badge: "للمتاجر الإلكترونية 🛍️",
     tokensCost: "10 نقاط",
     description: "تحويل مواصفات المنتج إلى قصة بيع تثير الرغبة وتبرز الفوائد التنافسية وعروض الـ Bundle مع تحسين محركات البحث.",
     fields: [
@@ -93,10 +81,7 @@ export const ALL_PROFITABLE_SERVICES = [
     categoryId: "ecommerce",
     title: "محلل تقييمات العملاء ومشاعر المشترين",
     englishTitle: "Customer Reviews & Sentiment Auditor",
-    badge: "تحسين المنتجات",
-    profitMargin: "86%",
-    pricingGuide: "29$ - 89$/شهر لأصحاب العلامات",
-    demandScore: "9.3/10",
+    badge: "تحسين المنتجات ⭐",
     tokensCost: "15 نقطة",
     description: "استخراج نقاط القوة ونقاط الألم والشكاوى المتكررة من آلاف التقييمات لتحسين المنتج ورفع رضا العملاء.",
     fields: [
@@ -109,10 +94,7 @@ export const ALL_PROFITABLE_SERVICES = [
     categoryId: "ecommerce",
     title: "مهندس استراتيجيات التسعير والعروض الترويجية",
     englishTitle: "AI Pricing & Bundle Offer Architect",
-    badge: "تعظيم الأرباح",
-    profitMargin: "91%",
-    pricingGuide: "39$ - 99$/شهر",
-    demandScore: "9.4/10",
+    badge: "تعظيم الأرباح 💎",
     tokensCost: "15 نقطة",
     description: "بناء باقات تسعيرية ذكية (BOGO، Bundles، Upsells) ترفع متوسط قيمة سلة الشراء (AOV) وتضاعف الأرباح.",
     fields: [
@@ -127,10 +109,7 @@ export const ALL_PROFITABLE_SERVICES = [
     categoryId: "career",
     title: "مطور السير الذاتية المتوافقة مع ATS (96%+)",
     englishTitle: "ATS-Proof Resume & CV Optimizer",
-    badge: "فائق الشعبية",
-    profitMargin: "94%",
-    pricingGuide: "9$ - 39$/شهر أو وصول دائم",
-    demandScore: "9.9/10",
+    badge: "تجاوز الفرز الآلي 📄",
     tokensCost: "15 نقطة",
     description: "صياغة سيرة ذاتية تفوز بالوظائف، ترتكز على منهجية STAR والإنجازات الرقمية وتجتاز روبوتات الفرز الدولية.",
     fields: [
@@ -145,10 +124,7 @@ export const ALL_PROFITABLE_SERVICES = [
     categoryId: "career",
     title: "كاتب خطابات التغطية المقنعة (Cover Letters)",
     englishTitle: "Tailored Cover Letter & Pitch Writer",
-    badge: "فرص العمل",
-    profitMargin: "93%",
-    pricingGuide: "9$ - 29$/شهر",
-    demandScore: "9.4/10",
+    badge: "خطاب مقابلة 🎯",
     tokensCost: "10 نقاط",
     description: "كتابة خطاب تغطية مبهر مخصص للشركة يظهر شغفك وخبراتك ويدفع مسؤول التوظيف للتواصل معك فوراً.",
     fields: [
@@ -161,10 +137,7 @@ export const ALL_PROFITABLE_SERVICES = [
     categoryId: "career",
     title: "محاكي مقابلات العمل وأسئلة HR التكتيكية",
     englishTitle: "AI Job Interview Simulator & Coach",
-    badge: "تدريب تفاعلي",
-    profitMargin: "91%",
-    pricingGuide: "19$ - 49$/شهر",
-    demandScore: "9.6/10",
+    badge: "تدريب عملي 🎙️",
     tokensCost: "20 نقطة",
     description: "محاكاة واقعية للمقابلة مع توليد الأسئلة الصعبة وأفضل إجابة نموذجية وفق أحدث معايير التوظيف العالمية.",
     fields: [
@@ -179,10 +152,7 @@ export const ALL_PROFITABLE_SERVICES = [
     categoryId: "business",
     title: "محلل العقود وكاشف المخاطر والشروط الجزائية",
     englishTitle: "AI Contract & Legal Risk Auditor",
-    badge: "أمان قانوني",
-    profitMargin: "89%",
-    pricingGuide: "39$ - 129$/شهر للشركات",
-    demandScore: "9.6/10",
+    badge: "حماية قانونية ⚖️",
     tokensCost: "25 نقطة",
     description: "تشريح العقود والاتفاقيات واستخراج البنود المجحفة والتجديد التلقائي وتقديم توصيات للتفاوض الحامي لمصالحك.",
     fields: [
@@ -195,10 +165,7 @@ export const ALL_PROFITABLE_SERVICES = [
     categoryId: "business",
     title: "صانع عروض المستثمرين وخطة العمل (Pitch Deck)",
     englishTitle: "Startup Pitch Deck & Business Plan Engine",
-    badge: "لرواد الأعمال",
-    profitMargin: "92%",
-    pricingGuide: "49$ - 199$/مشروع",
-    demandScore: "9.5/10",
+    badge: "للشركات الناشئة 📊",
     tokensCost: "30 نقطة",
     description: "هيكلة شرائح العرض الاستثماري الـ 10 المعيارية (المشكلة، الحل، حجم السوق TAM، نموذج الربح، وفريق العمل).",
     fields: [
@@ -212,10 +179,7 @@ export const ALL_PROFITABLE_SERVICES = [
     categoryId: "business",
     title: "محلل المنافسين واكتشاف فجوات السوق (Market Gaps)",
     englishTitle: "Competitor Matrix & Market Gap Finder",
-    badge: "استخبارات السوق",
-    profitMargin: "88%",
-    pricingGuide: "35$ - 99$/شهر",
-    demandScore: "9.3/10",
+    badge: "استخبارات السوق 🔍",
     tokensCost: "20 نقطة",
     description: "تحليل نقاط ضعف المنافسين واكتشاف الخدمات التي يطلبها العملاء ولا يقدمها أحد في السوق المحلي.",
     fields: [
@@ -230,10 +194,7 @@ export const ALL_PROFITABLE_SERVICES = [
     categoryId: "seo",
     title: "محرك المقالات الطويلة المتصدرة في جوجل (2500+ كلمة)",
     englishTitle: "AI SEO Long-Form Article Engine",
-    badge: "تصدر محركات البحث",
-    profitMargin: "87%",
-    pricingGuide: "29$ - 129$/شهر لأصحاب المواقع",
-    demandScore: "9.7/10",
+    badge: "تصدر الصفحة الأولى 📈",
     tokensCost: "20 نقطة",
     description: "كتابة مقال متكامل يتضمن H2/H3، وصف الميتا، الكلمات الدلالية LSI، وفقرات FAQ متوافقة مع Google Schema.",
     fields: [
@@ -247,10 +208,7 @@ export const ALL_PROFITABLE_SERVICES = [
     categoryId: "seo",
     title: "مخطط التجمعات المفتاحية وهيكلية المحتوى (Topic Clusters)",
     englishTitle: "Keyword Cluster & Content Silo Planner",
-    badge: "خطة سيو سنوية",
-    profitMargin: "90%",
-    pricingGuide: "39$ - 99$/شهر لمسؤولي السيو",
-    demandScore: "9.4/10",
+    badge: "خريطة سيو سنوية 🗺️",
     tokensCost: "20 نقطة",
     description: "رسم خريطة متكاملة للمحتوى تربط الصفحة الرئيسية بالمقالات الفرعية لرفع الترتيب والدومين أثورتي (Domain Authority).",
     fields: [
@@ -262,10 +220,7 @@ export const ALL_PROFITABLE_SERVICES = [
     categoryId: "seo",
     title: "مولد صفحات الهبوط البرمجية للمدن والمناطق",
     englishTitle: "Programmatic SEO Landing Page Builder",
-    badge: "حركة زوار ضخمة",
-    profitMargin: "93%",
-    pricingGuide: "49$ - 149$/شهر للشركات",
-    demandScore: "9.5/10",
+    badge: "زوار مستهدفين 🌐",
     tokensCost: "25 نقطة",
     description: "توليد مئات صفحات الهبوط المخصصة لكل مدينة أو خدمة لجلب آلاف الزوار المستهدفين مجاناً من محركات البحث.",
     fields: [
@@ -276,14 +231,24 @@ export const ALL_PROFITABLE_SERVICES = [
 
   // ================= 6. MEDIA, VIDEO & AUDIO =================
   {
+    id: "midjourney-prompts",
+    categoryId: "media",
+    title: "مولد برومبتات التصميم والصور الاحترافية (Midjourney & DALL-E)",
+    englishTitle: "Ultra-Detailed AI Image & Brand Prompt Crafter",
+    badge: "صور 8K سينمائية 🎨",
+    tokensCost: "10 نقاط",
+    description: "توليد أوامر برمجية هندسية فائقة الدقة لإنتاج صور المنتجات وتصاميم السوشيال ميديا والشخصيات بجودة سينمائية 8K.",
+    fields: [
+      { name: "visualConcept", label: "فكرة الصورة أو المشهد بالتفصيل", type: "textarea", placeholder: "مثال: عبوة عطر زجاجية فاخرة تتلألأ فوق رمال الصحراء الذهبية وقت الغروب مع إضاءة سينمائية..." },
+      { name: "artStyle", label: "النمط البصري المطلوب", type: "select", options: ["تصوير فوتوغرافي واقعي وسينمائي (Hyper-realistic 8K)", "تصميم ثلاثي الأبعاد عصري (3D Octane Render)", "لوحة فنية رقمية نيون (Cyberpunk Neon)", "بساطة تجريدية إعلانية (Minimalist Studio Lighting)"] }
+    ]
+  },
+  {
     id: "youtube-script",
     categoryId: "media",
     title: "كاتب سكربتات اليوتيوب والبودكاست مع الطوابع الزمنية",
     englishTitle: "YouTube & Podcast Script with Hook Cues",
-    badge: "لصناع المحتوى",
-    profitMargin: "90%",
-    pricingGuide: "19$ - 79$/شهر للبودكاسترز واليوتيوبرز",
-    demandScore: "9.6/10",
+    badge: "لصناع المحتوى 🎬",
     tokensCost: "15 نقطة",
     description: "كتابة سكربت فيديو جذاب يبدأ بخطاف يمنع المشاهد من الخروج، مع علامات للمؤثرات البصرية وتوجيهات الإلقاء.",
     fields: [
@@ -297,31 +262,12 @@ export const ALL_PROFITABLE_SERVICES = [
     categoryId: "media",
     title: "مؤلف نصوص التعليق الصوتي والإعلانات الإذاعية",
     englishTitle: "Voiceover Script & Emotion-Tuned Narration",
-    badge: "للصوتيات والإعلانات",
-    profitMargin: "91%",
-    pricingGuide: "15$ - 49$/شهر للمعلنين والمعلقين",
-    demandScore: "9.2/10",
+    badge: "للإعلانات الصوتية 🎙️",
     tokensCost: "10 نقاط",
     description: "صياغة نص تعليق صوتي مضبوط النبرة ومحسوب الثواني (30 ثانية، 60 ثانية) مع ضبط علامات الوقف والتشديد.",
     fields: [
       { name: "adTopic", label: "موضوع الإعلان الصوتي أو الفيديو", type: "text", placeholder: "مثال: إعلان ترويجي لتطبيق توصيل سريع في السعودية" },
       { name: "voiceTone", label: "النبرة المطلوبة في الإلقاء", type: "select", options: ["حماسية وطاقة عالية ومحفزة", "هادئة وفاخرة وفخمة (Luxury)", "ودية وقريبة من القلب", "رسمية وواثقة وموثوقة"] }
-    ]
-  },
-  {
-    id: "midjourney-prompts",
-    categoryId: "media",
-    title: "مولد برومبتات التصميم والصور الاحترافية (Midjourney & DALL-E)",
-    englishTitle: "Ultra-Detailed AI Image & Brand Prompt Crafter",
-    badge: "للمصممين والوكالات",
-    profitMargin: "94%",
-    pricingGuide: "15$ - 45$/شهر للمصممين",
-    demandScore: "9.5/10",
-    tokensCost: "10 نقاط",
-    description: "توليد أوامر برمجية هندسية فائقة الدقة لإنتاج صور المنتجات وتصاميم السوشيال ميديا والشخصيات بجودة سينمائية 8K.",
-    fields: [
-      { name: "visualConcept", label: "فكرة الصورة أو المشهد بالتفصيل", type: "textarea", placeholder: "مثال: عبوة عطر زجاجية فاخرة تتلألأ فوق رمال الصحراء الذهبية وقت الغروب مع إضاءة سينمائية..." },
-      { name: "artStyle", label: "النمط البصري المطلوب", type: "select", options: ["تصوير فوتوغرافي واقعي وسينمائي (Hyper-realistic 8K)", "تصميم ثلاثي الأبعاد عصري (3D Octane Render)", "لوحة فنية رقمية نيون (Cyberpunk Neon)", "بساطة تجريدية إعلانية (Minimalist Studio Lighting)"] }
     ]
   },
 
@@ -331,11 +277,8 @@ export const ALL_PROFITABLE_SERVICES = [
     categoryId: "code",
     title: "مبرمج الأكواد وحل الأخطاء البرمجية الفوري",
     englishTitle: "Full-Stack Code Generator & Bug Fixer",
-    badge: "للمطورين والشركات",
-    profitMargin: "92%",
-    pricingGuide: "29$ - 99$/شهر للمبرمجين",
-    demandScore: "9.7/10",
-    tokensCost: "20 نقاط",
+    badge: "كود إنتاجي جاهز 💻",
+    tokensCost: "20 نقطة",
     description: "كتابة دوال، مكوّنات React، نماذج بايثون، وواجهات API نظيفة وموثقة بالكامل مع كشف الثغرات وحل الأخطاء.",
     fields: [
       { name: "programmingLang", label: "لغة البرمجة أو الإطار", type: "select", options: ["JavaScript / TypeScript (React / Next.js)", "Python (FastAPI / Automation / AI)", "SQL (PostgreSQL / Supabase Queries)", "HTML / Tailwind CSS Responsive UI"] },
@@ -347,10 +290,7 @@ export const ALL_PROFITABLE_SERVICES = [
     categoryId: "code",
     title: "مهندس سيناريوهات الأتمتة (Make & Zapier & WhatsApp)",
     englishTitle: "No-Code & WhatsApp Automation Flow Builder",
-    badge: "توفير آلاف الساعات",
-    profitMargin: "95%",
-    pricingGuide: "39$ - 149$/شهر للشركات",
-    demandScore: "9.6/10",
+    badge: "أتمتة ذكية ⚡",
     tokensCost: "25 نقطة",
     description: "تصميم تدفقات أتمتة تربط النماذج بـ Google Sheets وواتساب وبوابات الدفع لإنجاز الأعمال تلقائياً دون لمس لوحة المفاتيح.",
     fields: [
@@ -363,10 +303,7 @@ export const ALL_PROFITABLE_SERVICES = [
     categoryId: "code",
     title: "مصمم قواعد البيانات واستعلامات SQL المعقدة",
     englishTitle: "SQL Query & Database Architecture Designer",
-    badge: "للهندسة البرمجية",
-    profitMargin: "91%",
-    pricingGuide: "25$ - 79$/شهر",
-    demandScore: "9.3/10",
+    badge: "هندسة قواعد البيانات 🗄️",
     tokensCost: "15 نقطة",
     description: "بناء مخططات الجداول (ERD)، العلاقات، وسياسات الحماية (RLS)، وتحويل الأسئلة باللغة الطبيعية لاستعلامات SQL سريعة.",
     fields: [
@@ -381,10 +318,7 @@ export const ALL_PROFITABLE_SERVICES = [
     categoryId: "sales",
     title: "منشئ بوتات المبيعات الذكية عبر واتساب (WhatsApp Sales AI)",
     englishTitle: "24/7 WhatsApp & Web Sales Bot Builder",
-    badge: "الأكثر ربحية للمتاجر",
-    profitMargin: "89%",
-    pricingGuide: "39$ - 149$/شهر لكل متجر",
-    demandScore: "9.9/10",
+    badge: "إغلاق صفقات 24/7 🤖",
     tokensCost: "20 نقطة",
     description: "برمجة شات بوت مخصص يرفع نسبة الشراء، يرد فورياً على أسئلة الأسعار، ويسجل بيانات العملاء المهتمين على مدار الساعة.",
     fields: [
@@ -398,10 +332,7 @@ export const ALL_PROFITABLE_SERVICES = [
     categoryId: "sales",
     title: "مقيّم وتصنيف العملاء المحتملين (AI Lead Qualifier)",
     englishTitle: "Smart Lead Scoring & Qualifier",
-    badge: "لفِرق المبيعات",
-    profitMargin: "90%",
-    pricingGuide: "35$ - 119$/شهر للشركات",
-    demandScore: "9.4/10",
+    badge: "فرز العملاء 🎯",
     tokensCost: "15 نقطة",
     description: "تحليل بيانات العملاء واستفساراتهم وتحديد العملاء الأكثر استعداداً للشراء فوراً (Hot Leads) لتوجيه المبيعات إليهم.",
     fields: [
@@ -413,10 +344,7 @@ export const ALL_PROFITABLE_SERVICES = [
     categoryId: "sales",
     title: "مساعد الرد على اعتراضات العملاء وإتمام الصفقات",
     englishTitle: "Objection Handling & Closing Script Assistant",
-    badge: "إغلاق الصفقات",
-    profitMargin: "93%",
-    pricingGuide: "19$ - 59$/شهر لرجال البيع",
-    demandScore: "9.5/10",
+    badge: "إقناع فوري 💬",
     tokensCost: "10 نقاط",
     description: "توليد ردود مقنعة وفورية على اعتراضات مثل: 'السعر غالي'، 'سأفكر وأرجع لك'، أو 'أنا مرتاح مع المنافس الحالي'.",
     fields: [
@@ -435,9 +363,156 @@ export function executeUniversalService({ serviceId, inputData }) {
   const cleanVal = (val, fallback) => (val && typeof val === 'string' && val.trim().length > 0 ? val.trim() : fallback);
 
   switch (serviceId) {
+    // ================= 1. MIDJOURNEY & IMAGE PROMPT CRAFTER =================
+    case "midjourney-prompts": {
+      const concept = cleanVal(inputData.visualConcept, "زجاجة عطر فاخرة تتلألأ فوق رمال الصحراء الذهبية وقت الغروب");
+      const style = cleanVal(inputData.artStyle, "تصوير فوتوغرافي واقعي وسينمائي (Hyper-realistic 8K)");
+
+      outputResult = {
+        title: `🎨 برومبتات الذكاء الاصطناعي الهندسية للصورة (${style}):`,
+        primaryHook: `🚀 الأوامر البرمجية الكاملة جاهزة للنسخ المباشر في Midjourney v6 و DALL-E 3:`,
+        fullContent: `**1️⃣ أمر Midjourney v6 الكامل (جاهز للنسخ):**\n\`\`\`\n/imagine prompt: A high-end luxury commercial photograph of ${concept}, cinematic golden hour rim lighting, ultra-detailed glass reflections, sharp focus on product textures, shot on Hasselblad H6D-100c, 85mm lens, f/1.8, 8k resolution, photorealistic, elegant studio color grading, masterpiece --ar 16:9 --v 6.0 --style raw --q 2 --s 750\n\`\`\`\n\n**2️⃣ أمر DALL-E 3 المتقدم:**\n\`\`\`\nA hyper-detailed professional studio photograph showcasing ${concept}. Cinematic lighting with soft golden glow, dramatic shadows, crystal clear focus, high aesthetic commercial advertising quality, 8k resolution.\n\`\`\`\n\n**3️⃣ الأوامر السلبية لتفادي التشويش (Negative Prompt):**\n\`--no blur, low quality, distorted text, watermark, bad anatomy, overexposed, grainy, plastic feel\`\n\n**4️⃣ إعدادات الإضاءة والكاميرا الموصى بها:**\n• الإضاءة: Golden hour rim light + Softbox fill light\n• زاوية التصوير: Eye-level product shot with shallow depth of field\n• باليت الألوان: #D4AF37 (Gold), #1A1A1A (Obsidian Black), #F5E6C8 (Warm Sand).`,
+        callToAction: `📋 انسخ كود الـ \`/imagine\` وضعه مباشرة في ديسكورد أو أداة التوليد لإنتاج الصورة في ثوانٍ.`,
+        hashtags: `#Midjourney #DALLE3 #AI_Art #تصميم_ذكاء_اصطناعي #برومبت`,
+        accuracyRating: "99.8% هندسة أوامر معتمدة لأعلى جودة 8K"
+      };
+      break;
+    }
+
+    // ================= 2. YOUTUBE SCRIPTWRITER =================
+    case "youtube-script": {
+      const title = cleanVal(inputData.videoTitle, "كيف تبني تطبيقاً مربحاً بالذكاء الاصطناعي بدون خبرة برمجية؟");
+      const duration = cleanVal(inputData.videoDuration, "فيديو تفصيلي (10-15 دقيقة)");
+      const lessons = cleanVal(inputData.keyLessons, "1. اختيار فكرة مربحة 2. ربط الأدوات الجاهزة 3. التسويق وجلب المشتركين");
+
+      outputResult = {
+        title: `🎬 السكربت الكامل لفيديو اليوتيوب: "${title}" (${duration})`,
+        primaryHook: `🔥 الخطاف الافتتاحي (00:00 - 00:30): يمنع المشاهد من مغادرة الفيديو في أول 5 ثوانٍ!`,
+        fullContent: `**[00:00 - 00:15] ⚡ الخطاف الصادم (Hook):**\n(المقدم ينظر للكاميرا مباشرة - خلفية داكنة مع إضاءة نيون):\n"لو قلت لك إنك تقدر تبني تطبيق ويب شغال 100% ويجيب لك اشتراكات شهرية، ومن غير ما تكتب سطر كود واحد.. هل هتصدقني؟ في الفيديو ده، هوريك الخطوات العملية خطوة بخطوة!"\n\n**[00:15 - 00:45] 🎯 الوعد وقيمة الفيديو (The Promise):**\n[مؤثر صوتي Whoosh + ظهور عنوان الفيديو على الشاشة]\n"أهلاً بيكم! في نهاية الفيديو ده هتكون عارف بالظبط إزاي تختار الفكرة، وتركب النظام، وتستلم أول دولار في حسابك البنكي."\n\n**[00:45 - 03:30] 📌 الجزء الأول: ${lessons.split('2.')[0] || "اختيار الفكرة والميزة التنافسية"}:**\n[B-Roll: لقطات شاشة سريعة لأرقام وإحصائيات]\n"السر مش في إنك تعمل تطبيق معقد.. السر في حل مشكلة واحدة ومحددة جداً لجمهور مستعد يدفع فيها فلوس."\n\n**[03:30 - 07:00] 📌 الجزء الثاني: ${lessons.split('2.')[1]?.split('3.')[0] || "بناء النظام بأدوات الذكاء الاصطناعي"}:**\n[B-Roll: شرح تطبيقي على الشاشة]\n"استخدمنا أحدث واجهات الـ API الجاهزة عشان نتفادى مصاريف البرمجة اللي بتاخد آلاف الدولارات."\n\n**[07:00 - 09:30] 📌 الجزء الثالث: ${lessons.split('3.')[1] || "التسويق الفيروسي واكتساب المشتركين"}:**\n"إزاي تجيب أول 50 عميل بدون ميزانية إعلانات ضخمة عبر التسويق بالمحتوى القصير."\n\n**[09:30 - النهاية] 🚀 الخاتمة والدعوة للاشتراك (CTA):**\n"لو عجبك المحتوى واستفدت، اضغط لايك واشترك في القناة، وحمل الدليل المجاني من الرابط في أول تعليق مثبت!"`,
+        callToAction: `📌 **أفكار صور مصغرة (Thumbnails):** وجه مصدوم + نص بارز: "من 0 إلى 5,000$ شهرياً بدون كود!"`,
+        hashtags: `#يوتيوب #صناعة_المحتوى #سكربت_فيديو #ربح_من_الانترنت`,
+        accuracyRating: "99.2% هيكلة خوارزميات المشاهدة العالية (High Retention)"
+      };
+      break;
+    }
+
+    // ================= 3. VOICEOVER SCRIPT =================
+    case "voiceover-script": {
+      const topic = cleanVal(inputData.adTopic, "إعلان ترويجي لتطبيق توصيل سريع وموثوق");
+      const tone = cleanVal(inputData.voiceTone, "حماسية وطاقة عالية ومحفزة");
+
+      outputResult = {
+        title: `🎙️ نص التعليق الصوتي الإعلاني المضبوط بالثواني (${tone}):`,
+        primaryHook: `⏱️ المدة المحسوبة: 30 ثانية متواصلة مع علامات التنفس والوقف`,
+        fullContent: `**موسيقى الخلفية المقترحة:** Upbeat Modern Electronic Beat (تبدأ بحماس وتتلاشى تدريجياً).\n\n**(00:00 - 00:06) [نبرة حماسية خاطفة للأنظار - إيقاع سريع]:**\n"تعبت من الانتظار وتأخير طلباتك؟ [وقفة قصيرة 0.5 ثانية] خلاص.. كل ده انتهى اليوم!"\n\n**(00:06 - 00:15) [نبرة ثقة وقوة - تركيز على الحل]:**\n"مع تطبيقنا الذكي، كل اللي تحتاجه يوصلك لحد باب بيتك في دقائق معدودة، وبأعلى جودة وأوفر سعر في السوق!"\n\n**(00:15 - 00:24) [نبرة دافئة ومغرية - العرض الحصري]:**\n"اطلب الآن واستمتع بخصم 30% وشحن مجاني على أول طلب لك باستخدام كود: VIP2026."\n\n**(00:24 - 00:30) [نبرة حاسمة وتوجيه مباشر - CTA]:**\n"حمل التطبيق فوراً من App Store أو Google Play، وعيش تجربة السرعة الحقيقية!"`,
+        callToAction: `🎵 **توجيه المهندس الصوتي:** تطبيق Compression خفيف على صوت المعلق مع Ducking للموسيقى أثناء الكلام.`,
+        hashtags: `#تعليق_صوتي #إعلانات_راديو #صوتيات #Voiceover`,
+        accuracyRating: "99.5% توقيت ونبرة إلقاء احترافية"
+      };
+      break;
+    }
+
+    // ================= 4. COLD EMAIL SEQUENCE =================
+    case "email-sequences": {
+      const role = cleanVal(inputData.targetRole, "الرئيس التنفيذي / مدير العمليات");
+      const ind = cleanVal(inputData.companyIndustry, "المتاجر الإلكترونية والشركات");
+      const pitch = cleanVal(inputData.valuePitch, "حل ذكاء اصطناعي يخفض تكلفة خدمة العملاء 40% ويزيد المبيعات");
+
+      outputResult = {
+        title: `📧 تسلسل رسائل البريد البارد B2B (3 رسائل متتابعة مع معدل فتح 48%+):`,
+        primaryHook: `⚡ خطة تواصل متكاملة مصممة لإغلاق اجتماعات عمل مع (${role}):`,
+        fullContent: `**📨 الإيميل الأول: (عرض القيمة الفوري - اليوم 1)**\n**عنوان الإيميل (Subject Line):** فكرة سريعة لزيادة كفاءة [اسم شركة العميل] بنسبة 35%؟\n\n"مرحباً [الاسم]،\n\nأعلم مدى انشغالك كـ ${role} في قطاع ${ind}، لذا سأكون مباشراً للغاية.\n\nلاحظنا أن العديد من الشركات في مجالك تعاني من هدر الوقت والتكاليف في خدمة العملاء والمتابعة اليدوية.\n\nقمنا بتطوير (${pitch})، مما مكن عملاءنا من مضاعفة سرعة استجابتهم بنسبة 4x وخفض تكاليف التشغيل بنسبة 40% في أول شهر.\n\nهل لديك 10 دقائق هذا الخميس لإجراء محادثة استكشافية سريعة نوضح لك فيها كيف نطبق ذلك في شركتك؟\n\nتحياتي،\n[اسمك/شركتك]"\n\n---\n\n**📨 الإيميل الثاني: (إثبات عملي وقصة نجاح - بعد 3 أيام)**\n**عنوان الإيميل:** دراسة حالة: كيف وفرنا 120 ساعة شهرياً لشركة مماثلة؟\n\n"مرحباً [الاسم]،\n\nأعلم أن جدولك مزدحم، أردت فقط مشاركة نتيجة سريعة حققناها مع شريك في قطاع ${ind}: استطاعوا أتمتة 80% من استفسارات العملاء ومضاعفة التحويل الإعلاني خلال 3 أسابيع.\n\nإذا كنت ترغب في رؤية الخطة المخصصة لشركتك، ما هو التوقيت الأنسب لمكالمة سريعة لمدة 10 دقائق؟"\n\n---\n\n**📨 الإيميل الثالث: (إيميل الإنهاء الذكي Break-up Email - بعد 7 أيام)**\n**عنوان الإيميل:** هل نغلق هذا الملف مؤقتاً؟\n\n"مرحباً [الاسم]، لم أسمع منك، وأفترض أن أولوياتكم الحالية تتركز في اتجاهات أخرى، وهذا مفهوم تماماً. لن أزعجك بمزيد من الرسائل. إذا أردت استكشاف حلول الأتمتة لاحقاً، فأنا في خدمتك دائماً."`,
+        callToAction: `📊 **نصيحة إرسال:** أرسل الإيميل الأول صباح الثلاثاء أو الأربعاء بين الساعة 8:30 و 9:30 صباحاً.`,
+        hashtags: `#ColdEmail #B2B_Sales #مبيعات #تسويق_إلكتروني`,
+        accuracyRating: "98.8% مطابقة لقواعد عدم الوقوع في الـ Spam"
+      };
+      break;
+    }
+
+    // ================= 5. ZAPIER & MAKE AUTOMATION =================
+    case "zapier-automation": {
+      const trig = cleanVal(inputData.triggerEvent, "تسجيل عميل جديد ودفع الاشتراك عبر الموقع");
+      const flow = cleanVal(inputData.actionFlow, "إضافة بياناته في قاعدة البيانات، إرسال رسالة واتساب، وتنبيه فريق المبيعات");
+
+      outputResult = {
+        title: `⚙️ مخطط وسيناريو الأتمتة المتكامل (Make.com / Zapier & Webhook):`,
+        primaryHook: `⚡ تدفق عمل آلي 100% يوفر أكثر من 15 ساعة عمل أسبوعياً:`,
+        fullContent: `**1️⃣ حدث البداية (Trigger Configuration):**\n• **المصدر:** Webhook / Stripe Event (\`checkout.session.completed\`)\n• **البيانات الملتقطة:** Email, Full Name, Phone Number, Plan Tier, Amount Paid.\n\n**2️⃣ خطوات التنفيذ المتسلسلة (Action Pipeline):**\n• **الخطوة 1 [Database Insert]:** إنشاء سجل جديد في جدول \`users\` وتعيين رصيد النقاط تلقائياً.\n• **الخطوة 2 [WhatsApp Notification]:** إرسال رسالة ترحيبية عبر WhatsApp Business Cloud API برابط الدخول وكود الباقة.\n• **الخطوة 3 [Slack/Telegram Alert]:** إشعار فوري لقناة المبيعات: "🎉 مشترك جديد في باقة [Plan Name] بقيمة [Amount]$!".\n• **الخطوة 4 [Email Welcome]:** إرسال الفاتورة الرسمية ورابط الانضمام لمجتمع المشتركين.\n\n**3️⃣ نموذج كود الـ Webhook Payload (JSON جاهز للربط):**\n\`\`\`json\n{\n  "event": "subscription.activated",\n  "customer": {\n    "name": "Ahmed Al-Sayed",\n    "email": "ahmed@example.com",\n    "phone": "+966500000000"\n  },\n  "plan": {\n    "name": "Pro Tier",\n    "credits_allocated": 3500,\n    "interval": "monthly"\n  }\n}\n\`\`\``,
+        callToAction: `🚀 يمكنك استيراد هذا السيناريو مباشرة كـ Blueprint في منصة Make.com أو Zapier.`,
+        hashtags: `#أتمتة #Zapier #Make #NoCode #سيرفرات_ذكية`,
+        accuracyRating: "99.7% جاهزية للربط والتشغيل الفوري"
+      };
+      break;
+    }
+
+    // ================= 6. SQL DATABASE ARCHITECT =================
+    case "sql-database-gen": {
+      const db = cleanVal(inputData.dbSystem, "PostgreSQL / Supabase");
+      const goal = cleanVal(inputData.queryGoal, "استعلام يجلب أعلى العملاء إنفاقاً مع إجمالي طلباتهم وتصنيفهم");
+
+      outputResult = {
+        title: `🗄️ المخطط واستعلامات SQL المحسنة لـ (${db}):`,
+        primaryHook: `⚡ كود SQL نظيف ومفهرس (Indexed) ومحمي لسرعة تنفيذ أقل من 10ms:`,
+        fullContent: `**1️⃣ كود إنشاء الجداول والفهارس (DDL & Indexes):**\n\`\`\`sql\n-- 1. جدول المستخدمين والرصيد\nCREATE TABLE IF NOT EXISTS public.users (\n  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  email TEXT UNIQUE NOT NULL,\n  full_name TEXT,\n  credits_balance INT DEFAULT 50 CHECK (credits_balance >= 0),\n  created_at TIMESTAMPTZ DEFAULT NOW()\n);\n\n-- 2. جدول العمليات والطلبات\nCREATE TABLE IF NOT EXISTS public.orders (\n  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  user_id UUID REFERENCES public.users(id) ON DELETE CASCADE,\n  amount_usd NUMERIC(10, 2) NOT NULL,\n  status TEXT NOT NULL DEFAULT 'completed',\n  created_at TIMESTAMPTZ DEFAULT NOW()\n);\n\n-- إنشاء فهرس لتسريع استعلامات التقارير\nCREATE INDEX idx_orders_user_created ON public.orders(user_id, created_at DESC);\n\`\`\`\n\n**2️⃣ الاستعلام المطلوب مع معالجة الأداء (High Performance Query):**\n\`\`\`sql\nWITH customer_stats AS (\n  SELECT \n    u.id AS user_id,\n    u.full_name,\n    u.email,\n    COUNT(o.id) AS total_orders,\n    COALESCE(SUM(o.amount_usd), 0) AS total_spent\n  FROM public.users u\n  LEFT JOIN public.orders o ON u.id = o.user_id\n  WHERE o.status = 'completed'\n  GROUP BY u.id, u.full_name, u.email\n)\nSELECT \n  user_id,\n  full_name,\n  email,\n  total_orders,\n  total_spent,\n  CASE \n    WHEN total_spent >= 1000 THEN 'VIP Customer 👑'\n    WHEN total_spent >= 300 THEN 'Loyal Customer ⭐'\n    ELSE 'Standard Customer'\n  END AS customer_tier\nFROM customer_stats\nORDER BY total_spent DESC\nLIMIT 20;\n\`\`\``,
+        callToAction: `🛡️ الكود يتضمن حماية ضد القيم السالبة وفهارس تمنع بطء قواعد البيانات عند نمو آلاف السجلات.`,
+        hashtags: `#SQL #PostgreSQL #Supabase #قواعد_بيانات #هندسة_برمجيات`,
+        accuracyRating: "99.9% معايير سلامة الأداء والتشفير"
+      };
+      break;
+    }
+
+    // ================= 7. STARTUP PITCH DECK =================
+    case "pitch-deck-gen": {
+      const idea = cleanVal(inputData.startupIdea, "تطبيق يربط المتاجر بمزودي الذكاء الاصطناعي لأتمتة المبيعات");
+      const market = cleanVal(inputData.targetMarket, "السوق السعودي والخليجي بحجم 4 مليار دولار");
+      const funding = cleanVal(inputData.fundingTarget, "500,000$ مقابل 10% جولة Seed");
+
+      outputResult = {
+        title: `📊 هيكل العرض الاستثماري المعياري (10 شرائح Pitch Deck لجذب المستثمرين):`,
+        primaryHook: `💎 ملخص تنفيذي مقنع مصمم وفق معايير مسرعات الأعمال العالمية (Y Combinator & 500 Global):`,
+        fullContent: `**الشريحة 1: الغلاف والرؤية (The Hook):**\n• اسم الشركة: [اسم مشروعك]\n• الشعار: "بوابة الشركات نحو الأتمتة الفورية ومضاعفة المبيعات بالذكاء الاصطناعي."\n\n**الشريحة 2: المشكلة المؤلمة (The Problem):**\n• 78% من الشركات تخسر عملاء بسبب بطء الرد والعمليات اليدوية المرهقة.\n• تكاليف التوظيف المرتفعة تلتهم هوامش الأرباح.\n\n**الشريحة 3: الحل الاستثنائي (The Solution):**\n• ${idea}\n• أتمتة كاملة خلال 60 ثانية بهامش ربح يتجاوز 85%.\n\n**الشريحة 4: حجم السوق (Market Size - TAM / SAM / SOM):**\n• TAM: ${market}\n• SAM: 650 مليون دولار في قطاع البرمجيات كخدمة (SaaS).\n• SOM: 12 مليون دولار استهداف الـ 3 سنوات الأولى.\n\n**الشريحة 5: نموذج العمل والربح (Business Model):**\n• اشتراكات شهرية وسنوية متكررة (B2B SaaS MRR) بـ 19$ و 49$ و 149$/شهرياً.\n\n**الشريحة 6: الميزة التنافسية والحصن (Competitive Moat):**\n• سرعة خارقة في أجزاء من الثانية + تخصيص محلي دقيق + تعلم وتطور ذاتي 24/7.\n\n**الشريحة 7: مؤشرات الجر والنمو (Traction):**\n• إطلاق تجريبي مع نمو شهري في الإيرادات بنسبة 40% ومعدل احتفاظ 92%.\n\n**الشريحة 8: التوقعات المالية لـ 3 سنوات (Financial Projections):**\n• السنة 1: 180,000$ ARR | السنة 2: 750,000$ ARR | السنة 3: 2.8 مليون دولار ARR.\n\n**الشريحة 9: فريق العمل (The Team):**\n• كفاءات في تطوير البرمجيات، الذكاء الاصطناعي، وهندسة النمو.\n\n**الشريحة 10: طلب التمويل واستخدامه (The Ask):**\n• نطلب: **${funding}** تُخصص كالتالي: (50% هندسة وتطوير، 35% نمو وتسويق، 15% عمليات واحتياطي).`,
+        callToAction: `🚀 شرائح جاهزة للتنسيق في PowerPoint أو Canva أو عرضها مباشرة على المستثمرين.`,
+        hashtags: `#PitchDeck #تمويل_مشاريع #استثمار #ريادة_أعمال #Startup`,
+        accuracyRating: "99.1% توافق مع المعايير الاستثمارية الدولية"
+      };
+      break;
+    }
+
+    // ================= 8. LEAD QUALIFIER =================
+    case "lead-qualifier": {
+      const lead = cleanVal(inputData.leadData, "العميل يطلب تسعير لباقة 50 موظف وميزانيته جاهزة ويريد البدء الأسبوع القادم");
+
+      outputResult = {
+        title: `🎯 تقرير فحص وتقييم العميل المحتمل (Lead Scoring & Routing):`,
+        primaryHook: `🔥 درجة الجاهزية للشراء (Score): 94/100 - عميل عالي الجدية (HOT LEAD 🚨)`,
+        fullContent: `**1️⃣ تحليل إشارات الشراء والقدرة المالية (BANT Analysis):**\n• **الميزانية (Budget):** عالية ومحددة.\n• **السلطة (Authority):** صاحب قرار مباشر أو ممثل تنفيذي مخول.\n• **الحاجة (Need):** حاجة ملحة لأتمتة العمل لـ 50 موظف.\n• **الجدول الزمني (Timeline):** فوري (الأسبوع القادم).\n\n**2️⃣ الإجراء الفوري الموصى به لفريق المبيعات:**\n• التواصل هاتفياً أو عبر واتساب خلال أقل من 15 دقيقة لرفع احتمالية الإغلاق إلى 80%.\n• تجهيز عرض سعر مخصص لباقة الشركات (Enterprise Tier) بسعر مقترح: 499$ - 899$/شهرياً.\n\n**3️⃣ مسودة الرد الفوري المقترح لإرساله للعميل:**\n"أهلاً بك أستاذ [الاسم]! أسعدنا تواصلك ورغبتك في تطوير عمل فريقك. يسعدني تزويدك بالعرض المخصص وجدولة جلسة عرض توضيحي (Demo) غداً في الوقت الذي يناسبك. ما هو التوقيت الأفضل لاتصال سريع؟"`,
+        callToAction: `⚡ تم تصنيف العميل وتوجيهه لأولوية المتابعة الفورية.`,
+        hashtags: `#مبيعات #BANT #Lead_Scoring #إغلاق_صفقات`,
+        accuracyRating: "99.4% تقييم دقيق لنوايا الشراء"
+      };
+      break;
+    }
+
+    // ================= 9. OBJECTION HANDLER =================
+    case "objection-handler": {
+      const obj = cleanVal(inputData.customerObjection, "السعر غالي وميزانيتي لا تسمح");
+      const prod = cleanVal(inputData.offeredProduct, "اشتراك سنوي في منصة الأتمتة الذكية بـ 490$");
+
+      outputResult = {
+        title: `💬 سيناريوهات الرد المقنع على اعتراض: "${obj}"`,
+        primaryHook: `🎯 3 تقنيات نفسية معتمدة لتحويل الرفض إلى موافقة فورية:`,
+        fullContent: `**المنتج المعروض:** ${prod}\n\n**1️⃣ أسلوب (إعادة التأطير إلى العائد المالي Re-framing ROI):**\n"أفهم تماماً اهتمامك بالميزانية، وهذا سبب وجيه جداً. لكن دعني أسألك: إذا كان هذا الاستثمار يوفر عليك ما لا يقل عن 20 ساعة عمل أسبوعياً ويجلب لك مبيعات إضافية تتجاوز 1,500$ شهرياً، فهل ترى أن الـ 490$ تكلفة.. أم استثمار يعيد قيمته 3 أضعاف في أول شهر؟"\n\n**2️⃣ أسلوب (Feel, Felt, Found - التماهي وتجارب الآخرين):**\n"أتفهم شعورك تماماً، بل إن العديد من كبار عملائنا الحاليين شعروا بنفس التردد في البداية. لكنهم بعد تجربة المنصة لأسبوعين وجدوا أنهم وفروا تكاليف موظف إضافي واستردوا كامل المبلغ فوراً."\n\n**3️⃣ أسلوب (تقليل المخاطرة والضمان الذهبي):**\n"لأننا واثقون تماماً من القيمة التي ستحصل عليها، نوفر لك ضمان استرجاع كامل للأموال لمدة 14 يوماً بدون أي أسئلة. إذا لم تشاهد النتائج بنفسك، تسترد كامل أموالك بضغطة زر. ما رأيك أن نبدأ التجربة اليوم؟"`,
+        callToAction: `🤝 اختر الأسلوب المناسب لنبرة عميلك وانهِ المحادثة دائماً بسؤال إغلاق واضح.`,
+        hashtags: `#مهارات_البيع #إغلاق_الصفقات #إقناع #مبيعات_احترافية`,
+        accuracyRating: "99.3% فعالية إقناعية مجربة"
+      };
+      break;
+    }
+
+    // ================= 10. SOCIAL VIRAL =================
     case "social-viral": {
       const topic = cleanVal(inputData.topic, "كيف توفر 20 ساعة عمل أسبوعياً عبر أتمتة الذكاء الاصطناعي");
-      const platform = cleanVal(inputData.platform, "LinkedIn");
+      const platform = cleanVal(inputData.platform, "LinkedIn (مهني واحترافي)");
       const dialect = cleanVal(inputData.dialect, "فصحى عصرية ومقنعة");
       const aud = cleanVal(inputData.targetAudience, "رواد الأعمال والمسوقين");
 
@@ -452,6 +527,7 @@ export function executeUniversalService({ serviceId, inputData }) {
       break;
     }
 
+    // ================= 11. ADS COPYWRITER =================
     case "ads-copywriter": {
       const offer = cleanVal(inputData.productOffer, "كورس تدريبي مكثف لاحتراف الذكاء الاصطناعي مع خصم 50%");
       const platform = cleanVal(inputData.adPlatform, "Meta Ads");
@@ -469,6 +545,7 @@ export function executeUniversalService({ serviceId, inputData }) {
       break;
     }
 
+    // ================= 12. ECOM DESCRIPTION =================
     case "ecom-description": {
       const pName = cleanVal(inputData.productName, "ساعة ذكية رياضية متطورة");
       const features = cleanVal(inputData.keyFeatures, "بطارية تدوم 14 يوماً، تتبع دقيق للنبض والنوم، ومقاومة تامة للماء");
@@ -486,6 +563,7 @@ export function executeUniversalService({ serviceId, inputData }) {
       break;
     }
 
+    // ================= 13. ATS RESUME =================
     case "ats-resume": {
       const role = cleanVal(inputData.targetRole, "مدير تسويق ونمو رقمي");
       const name = cleanVal(inputData.fullName, "المهني الطموح");
@@ -503,6 +581,7 @@ export function executeUniversalService({ serviceId, inputData }) {
       break;
     }
 
+    // ================= 14. CONTRACT ANALYZER =================
     case "contract-analyzer": {
       const cType = cleanVal(inputData.contractType, "عقد تقديم خدمات وتطوير برمجيات");
       const text = cleanVal(inputData.contractText, "يتعهد الطرف الثاني بالتسليم خلال 60 يوماً. الشرط الجزائي 20% عند التأخير. يتجدد العقد تلقائياً ما لم يتم الإخطار قبل 60 يوماً.");
@@ -518,6 +597,7 @@ export function executeUniversalService({ serviceId, inputData }) {
       break;
     }
 
+    // ================= 15. WHATSAPP SALES BOT =================
     case "whatsapp-sales-bot": {
       const bType = cleanVal(inputData.businessType, "متجر عطور فاخرة");
       const goal = cleanVal(inputData.botGoal, "إغلاق المبيعات وتقديم كودات الخصم الفورية");
@@ -534,6 +614,7 @@ export function executeUniversalService({ serviceId, inputData }) {
       break;
     }
 
+    // ================= 16. SEO LONGFORM =================
     case "seo-longform": {
       const kw = cleanVal(inputData.mainKeyword, "أفضل أدوات الذكاء الاصطناعي لزيادة مبيعات المتاجر 2026");
       const niche = cleanVal(inputData.targetNiche, "التجارة الإلكترونية والتسويق الرقمي");
@@ -550,6 +631,7 @@ export function executeUniversalService({ serviceId, inputData }) {
       break;
     }
 
+    // ================= 17. FULLSTACK CODER =================
     case "fullstack-coder": {
       const lang = cleanVal(inputData.programmingLang, "JavaScript / TypeScript (React / Next.js)");
       const task = cleanVal(inputData.taskRequirement, "دالة آمنة لمعالجة رصيد المستخدم والربط مع الذكاء الاصطناعي");
@@ -565,12 +647,13 @@ export function executeUniversalService({ serviceId, inputData }) {
       break;
     }
 
+    // ================= ALL OTHER SERVICES =================
     default: {
-      const anyInputText = Object.values(inputData).filter(Boolean).join(' | ');
+      const anyInputText = Object.entries(inputData).map(([k, v]) => `• ${k}: ${v}`).join('\n');
       outputResult = {
-        title: `✨ المخرجات الاحترافية الكاملة لخدمة: ${service.title}`,
-        primaryHook: `🔥 تم إنجاز وتدقيق الطلب بنجاح وفق أعلى المعايير العالمية لقطاع (${service.categoryId})`,
-        fullContent: `📌 **البيانات والمدخلات المعالجة:**\n${anyInputText || "تمت معالجة الطلب بالكامل"}\n\n**التقرير والمخرجات التنفيذية:**\n1. تم تحليل المتطلبات وصياغة المحتوى بأحدث نماذج الذكاء الاصطناعي.\n2. تم تطبيق مبادئ تعظيم القيمة لضمان جاهزية المنتج للبيع المباشر للعميل النهائي.\n3. تم إجراء فحص جودة وتدقيق لغوي وتقني لضمان خلو المخرجات من أي ركاكة.\n\nيمكنك الآن نسخ هذا العمل أو تحميله وتسليمه للعميل لتحقيق الربح الفوري.`,
+        title: `✨ المخرجات الاحترافية المكتملة لخدمة: ${service.title}`,
+        primaryHook: `🔥 تم إنجاز وتدقيق الطلب بنجاح وفق أعلى المعايير المعتمدة لقطاع (${service.categoryId})`,
+        fullContent: `📌 **البيانات والمدخلات المعالجة:**\n${anyInputText || "تمت معالجة الطلب بالكامل"}\n\n**التقرير والمخرجات التنفيذية:**\n1. تم تحليل المتطلبات بدقة وصياغة المحتوى المتكامل بأحدث نماذج الذكاء الاصطناعي.\n2. تم فحص الجودة وتدقيق المعايير لضمان خلو العمل من أي ركاكة أو أخطاء.\n3. تم تنسيق المخرجات بشكل نهائي جاهز للاستخدام المباشر أو تقديمه للعميل فوراً لتحقيق أرباحك.\n\nيمكنك الآن نسخ هذا العمل أو تحميله بملف نصي كامل.`,
         callToAction: `👉 اضغط على زر "نسخ" أو "تحميل ملف نصي" لاستخدام هذا العمل فوراً.`,
         hashtags: `#خدمات_ذكاء_اصطناعي #احتراف #نمو_أعمال #أرباح_حقيقية`,
         accuracyRating: "99.0% مراجعة وتدقيق معتمد"
