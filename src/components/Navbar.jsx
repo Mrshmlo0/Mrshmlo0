@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Crown, Grid, Brain, Activity, Layers, ShieldCheck, User, Lock } from 'lucide-react';
+import { Sparkles, Crown, Grid, Brain, Activity, Layers, ShieldCheck, User, Lock, Star } from 'lucide-react';
 
 export function Navbar({ activeTab, setActiveTab, userCredits, currentUser, onOpenPricing, onOpenFounderHub, onOpenAuth }) {
   return (
@@ -30,7 +30,7 @@ export function Navbar({ activeTab, setActiveTab, userCredits, currentUser, onOp
         <nav className="hidden xl:flex items-center gap-1 bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800 shadow-inner">
           <button
             onClick={() => setActiveTab('landing')}
-            className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+            className={`px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
               activeTab === 'landing'
                 ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30'
                 : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
@@ -40,9 +40,25 @@ export function Navbar({ activeTab, setActiveTab, userCredits, currentUser, onOp
             الرئيسية
           </button>
 
+          {/* New Flagship Ultra Studios Tab */}
+          <button
+            onClick={() => setActiveTab('ultra-studios')}
+            className={`px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+              activeTab === 'ultra-studios'
+                ? 'bg-gradient-to-r from-amber-500 via-purple-600 to-indigo-600 text-white shadow-md shadow-purple-600/30 ring-1 ring-amber-400/50'
+                : 'text-amber-300 hover:text-white hover:bg-slate-800/60'
+            }`}
+          >
+            <Star className="w-4 h-4 text-amber-300 fill-amber-300 animate-pulse" />
+            استوديوهات النخبة
+            <span className="px-1.5 py-0.5 text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-full font-black">
+              أعلى قيمة 🌟
+            </span>
+          </button>
+
           <button
             onClick={() => setActiveTab('services-catalog')}
-            className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+            className={`px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
               activeTab === 'services-catalog'
                 ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md shadow-indigo-600/30'
                 : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
@@ -57,19 +73,19 @@ export function Navbar({ activeTab, setActiveTab, userCredits, currentUser, onOp
 
           <button
             onClick={() => setActiveTab('incubator')}
-            className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+            className={`px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
               activeTab === 'incubator'
                 ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md shadow-purple-600/30'
                 : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
             }`}
           >
-            <Brain className="w-4 h-4 text-amber-300 animate-pulse" />
+            <Brain className="w-4 h-4 text-amber-300" />
             مسرّعة المشاريع
           </button>
 
           <button
             onClick={() => setActiveTab('evolution')}
-            className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+            className={`px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
               activeTab === 'evolution'
                 ? 'bg-amber-600 text-white shadow-md shadow-amber-600/30'
                 : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
@@ -131,6 +147,14 @@ export function Navbar({ activeTab, setActiveTab, userCredits, currentUser, onOp
           }`}
         >
           الرئيسية
+        </button>
+        <button
+          onClick={() => setActiveTab('ultra-studios')}
+          className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap ${
+            activeTab === 'ultra-studios' ? 'bg-amber-600 text-white' : 'text-amber-400 bg-slate-900 border border-amber-500/30'
+          }`}
+        >
+          استوديوهات النخبة ⭐
         </button>
         <button
           onClick={() => setActiveTab('services-catalog')}

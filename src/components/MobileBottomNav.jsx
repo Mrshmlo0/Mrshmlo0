@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layers, Grid, Brain, Activity, Calculator, Crown } from 'lucide-react';
+import { Layers, Star, Grid, Brain, Activity, Crown } from 'lucide-react';
 
 export function MobileBottomNav({ activeTab, setActiveTab, onOpenPricing }) {
   return (
@@ -15,13 +15,23 @@ export function MobileBottomNav({ activeTab, setActiveTab, onOpenPricing }) {
       </button>
 
       <button
+        onClick={() => setActiveTab('ultra-studios')}
+        className={`flex flex-col items-center gap-1 p-1.5 rounded-xl transition-all ${
+          activeTab === 'ultra-studios' ? 'text-amber-400 font-bold scale-105' : 'text-slate-400 hover:text-slate-200'
+        }`}
+      >
+        <Star className="w-5 h-5 fill-amber-400/30" />
+        <span className="text-[10px]">الاستوديوهات ⭐</span>
+      </button>
+
+      <button
         onClick={() => setActiveTab('services-catalog')}
         className={`flex flex-col items-center gap-1 p-1.5 rounded-xl transition-all ${
-          activeTab === 'services-catalog' ? 'text-indigo-400 font-bold scale-105' : 'text-slate-400 hover:text-slate-200'
+          activeTab === 'services-catalog' ? 'text-blue-400 font-bold scale-105' : 'text-slate-400 hover:text-slate-200'
         }`}
       >
         <Grid className="w-5 h-5" />
-        <span className="text-[10px]">الخدمات الـ 24</span>
+        <span className="text-[10px]">الـ 24 خدمة</span>
       </button>
 
       <button
@@ -30,18 +40,8 @@ export function MobileBottomNav({ activeTab, setActiveTab, onOpenPricing }) {
           activeTab === 'incubator' ? 'text-purple-400 font-bold scale-105' : 'text-slate-400 hover:text-slate-200'
         }`}
       >
-        <Brain className="w-5 h-5 text-amber-300" />
+        <Brain className="w-5 h-5 text-purple-300" />
         <span className="text-[10px]">المسرّعة</span>
-      </button>
-
-      <button
-        onClick={() => setActiveTab('evolution')}
-        className={`flex flex-col items-center gap-1 p-1.5 rounded-xl transition-all ${
-          activeTab === 'evolution' ? 'text-amber-400 font-bold scale-105' : 'text-slate-400 hover:text-slate-200'
-        }`}
-      >
-        <Activity className="w-5 h-5" />
-        <span className="text-[10px]">التطور</span>
       </button>
 
       <button

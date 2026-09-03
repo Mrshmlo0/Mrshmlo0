@@ -1,7 +1,7 @@
 import React from 'react';
-import { Sparkles, ArrowLeft, TrendingUp, ShieldCheck, Zap, DollarSign, Bot, Brain, Rocket, Activity } from 'lucide-react';
+import { Sparkles, ArrowLeft, TrendingUp, ShieldCheck, Zap, DollarSign, Bot, Brain, Rocket, Activity, Star } from 'lucide-react';
 
-export function Hero({ onExploreIncubator, onExploreServices, onOpenCalculator, onOpenBlueprint }) {
+export function Hero({ onExploreIncubator, onExploreServices, onExploreUltraStudios, onOpenCalculator, onOpenBlueprint }) {
   return (
     <div className="relative overflow-hidden pt-12 pb-20 border-b border-slate-800/60 bg-gradient-to-b from-slate-900/60 via-slate-950 to-slate-950">
       
@@ -36,31 +36,39 @@ export function Hero({ onExploreIncubator, onExploreServices, onOpenCalculator, 
 
         {/* Subtitle */}
         <p className="mt-6 text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto font-normal leading-relaxed">
-          منظومة متكاملة بمعايير عالمية تضم <span className="text-amber-300 font-bold">مجلس إدارة ذكي متكامل (CSO, CTO, CMO, CFO)</span>، وسرعة فائقة في أجزاء من الثانية، مع <span className="text-emerald-400 font-bold">محرك بحث وتطوير ذاتي</span> ينمو ويحل المشكلات ويدعم العملاء آلياً 24/7.
+          منظومة متكاملة بمعايير عالمية تضم <span className="text-amber-300 font-bold">مجلس إدارة ذكي متكامل (CSO, CTO, CMO, CFO)</span>، و <span className="text-purple-400 font-bold">5 استوديوهات تفاعلية للتصميم والتسويق والعقود والمبيعات</span>، مع <span className="text-emerald-400 font-bold">محرك بحث وتطوير ذاتي</span> ينمو ويحل المشكلات ويدعم العملاء آلياً 24/7.
         </p>
 
         {/* Action Buttons */}
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <button
-            onClick={onExploreIncubator}
-            className="px-8 py-4 rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-black text-base shadow-2xl shadow-indigo-600/40 hover:shadow-indigo-600/60 transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-3 cursor-pointer"
+            onClick={onExploreUltraStudios}
+            className="px-8 py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-purple-600 to-pink-600 hover:from-amber-400 hover:to-pink-500 text-white font-black text-base shadow-2xl shadow-purple-600/40 hover:shadow-purple-600/60 transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-3 cursor-pointer ring-2 ring-amber-400/30"
           >
-            <Brain className="w-5 h-5 text-amber-300" />
-            <span>ابدأ تجسيد فكرة مشروعك الآن (AI Incubator)</span>
+            <Star className="w-5 h-5 text-amber-300 fill-amber-300" />
+            <span>تجربة استوديوهات النخبة الـ 5 المباشرة</span>
             <ArrowLeft className="w-5 h-5" />
           </button>
 
           <button
-            onClick={onExploreServices}
-            className="px-7 py-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700 hover:border-slate-600 text-white font-bold text-base transition-all flex items-center gap-2.5 cursor-pointer"
+            onClick={onExploreIncubator}
+            className="px-7 py-4 rounded-2xl bg-gradient-to-r from-purple-700 to-indigo-700 hover:from-purple-600 hover:to-indigo-600 text-white font-bold text-base transition-all flex items-center gap-2.5 cursor-pointer shadow-lg shadow-indigo-600/30"
           >
-            <Zap className="w-5 h-5 text-amber-400" />
-            <span>استوديو الأدوات والخدمات الحية</span>
+            <Brain className="w-5 h-5 text-amber-300" />
+            <span>مسرّعة الأفكار والمشاريع</span>
+          </button>
+
+          <button
+            onClick={onExploreServices}
+            className="px-6 py-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700 hover:border-slate-600 text-white font-bold text-base transition-all flex items-center gap-2.5 cursor-pointer"
+          >
+            <Zap className="w-5 h-5 text-cyan-400" />
+            <span>دليل الـ 24 خدمة</span>
           </button>
 
           <button
             onClick={onOpenCalculator}
-            className="px-7 py-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700 hover:border-slate-600 text-white font-bold text-base transition-all flex items-center gap-2.5 cursor-pointer"
+            className="px-6 py-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700 hover:border-slate-600 text-white font-bold text-base transition-all flex items-center gap-2.5 cursor-pointer"
           >
             <DollarSign className="w-5 h-5 text-emerald-400" />
             <span>حاسبة الأرباح و MRR</span>
@@ -71,11 +79,11 @@ export function Hero({ onExploreIncubator, onExploreServices, onOpenCalculator, 
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
           <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-sm">
             <div className="flex items-center justify-center gap-2 text-amber-400 mb-1">
-              <Brain className="w-5 h-5" />
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-400">مجلس الإدارة الذكي</span>
+              <Star className="w-5 h-5 fill-amber-400" />
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-400">استوديوهات تفاعلية</span>
             </div>
-            <div className="text-2xl sm:text-3xl font-extrabold text-white">4 وكلاء</div>
-            <p className="text-xs text-slate-400 mt-1">استراتيجية، كود، تسويق، مالية</p>
+            <div className="text-2xl sm:text-3xl font-extrabold text-white">5 استوديوهات</div>
+            <p className="text-xs text-slate-400 mt-1">توليد ملفات وصور وعقود فورية</p>
           </div>
 
           <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-sm">

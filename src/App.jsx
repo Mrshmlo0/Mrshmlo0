@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { DeviceSimulatorBar } from './components/DeviceSimulatorBar';
 import { Hero } from './components/Hero';
+import { UltraStudiosHub } from './components/UltraStudiosHub';
 import { AllServicesCatalog } from './components/AllServicesCatalog';
 import { AutonomousProjectIncubator } from './components/AutonomousProjectIncubator';
 import { SelfEvolutionEngine } from './components/SelfEvolutionEngine';
@@ -15,7 +16,7 @@ import { MobileBottomNav } from './components/MobileBottomNav';
 import { Footer } from './components/Footer';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('landing'); // 'landing' | 'services-catalog' | 'incubator' | 'evolution'
+  const [activeTab, setActiveTab] = useState('landing'); // 'landing' | 'ultra-studios' | 'services-catalog' | 'incubator' | 'evolution'
   const [deviceMode, setDeviceMode] = useState('desktop'); // 'desktop' | 'iphone' | 'android'
   const [userCredits, setUserCredits] = useState(300);
   const [currentUser, setCurrentUser] = useState({
@@ -67,11 +68,22 @@ export default function App() {
       {activeTab === 'landing' && (
         <>
           <Hero
+            onExploreUltraStudios={() => setActiveTab('ultra-studios')}
             onExploreIncubator={() => setActiveTab('incubator')}
             onExploreServices={() => setActiveTab('services-catalog')}
             onOpenCalculator={handleFounderHubClick}
             onOpenBlueprint={handleOpenBlueprint}
           />
+
+          {/* Featured Ultra Studios Live Section */}
+          <div className="bg-slate-950/70 border-b border-slate-800/80">
+            <UltraStudiosHub
+              userCredits={userCredits}
+              setUserCredits={setUserCredits}
+              onOpenPricing={scrollToPricing}
+            />
+          </div>
+
           <AllServicesCatalog
             userCredits={userCredits}
             setUserCredits={setUserCredits}
@@ -89,6 +101,16 @@ export default function App() {
           />
           <TechStackSection />
         </>
+      )}
+
+      {activeTab === 'ultra-studios' && (
+        <div className="pt-4">
+          <UltraStudiosHub
+            userCredits={userCredits}
+            setUserCredits={setUserCredits}
+            onOpenPricing={scrollToPricing}
+          />
+        </div>
       )}
 
       {activeTab === 'services-catalog' && (
