@@ -17,10 +17,14 @@ import {
   Globe,
   Compass,
   FileCheck,
-  ShieldAlert
+  ShieldAlert,
+  Download,
+  Archive
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { AI_EXECUTIVE_AGENTS, incubateProjectIdea } from '../data/autonomousAgentsData';
+import { copyToClipboardSafe, downloadTextFileSafe } from '../utils/clipboardAndDownload';
+import { saveDeliverableToVault } from '../utils/deliverablesVault';
 
 export function AutonomousProjectIncubator({ userCredits, setUserCredits, onOpenPricing }) {
   const [projectIdea, setProjectIdea] = useState('منصة أتمتة مبيعات ودعم عملاء المتاجر الإلكترونية عبر WhatsApp بالذكاء الاصطناعي مع تحليلات لحظية');
@@ -34,11 +38,26 @@ export function AutonomousProjectIncubator({ userCredits, setUserCredits, onOpen
   const [incubatedResult, setIncubatedResult] = useState(null);
   const [activeTab, setActiveTab] = useState('strategy'); // 'strategy' | 'tech' | 'marketing' | 'finance' | 'checklist'
   const [copiedKey, setCopiedKey] = useState(null);
+  const [toastMsg, setToastMsg] = useState(null);
+
+  const showToast = (msg) => {
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(null), 3000);
+  };
 
   const copyText = (key, text) => {
-    navigator.clipboard.writeText(text);
-    setCopiedKey(key);
-    setTimeout(() => setCopiedKey(null), 2000);
+    copyToClipboardSafe(text, () => {
+      setCopiedKey(key);
+      showToast('📋 تم نسخ النص بنجاح!');
+      setTimeout(() => setCopiedKey(null), 2000);
+    });
+  };
+
+  const downloadFullBlueprint = () => {
+    if (!incubatedResult) return;
+    const doc = `=== دراسة وهندسة المشروع الكاملة ===\nاسم المشروع: ${incubatedResult.projectName}\nالفكرة: ${projectIdea}\nالسوق المستهدف: ${targetRegion}\nالجمهور: ${targetCustomer}\nالميزانية: ${budgetTier}\nتاريخ الإنجاز: ${incubatedResult.generatedAt}\n\n--- 1. تقرير الاستراتيجية والميزة التنافسية (CSO) ---\n${incubatedResult.strategyReport.csoSummary}\n\nعرض القيمة: ${incubatedResult.strategyReport.valueProposition}\nالحصن التنافسي:\n${incubatedResult.strategyReport.competitiveMoat.join('\n')}\n\n--- 2. البنية البرمجية والكود (CTO) ---\nالهيكلية: ${incubatedResult.techBlueprint.architecture}\nزمن التطوير: ${incubatedResult.techBlueprint.estimatedDevTime}\nجداول البيانات:\n${incubatedResult.techBlueprint.dbTables.join('\n')}\n\nكود البداية:\n${incubatedResult.techBlueprint.starterCode}\n\n--- 3. خطة التسويق والانتشار (CMO) ---\nالخطاف الفيروسي: ${incubatedResult.marketingPlan.viralHook}\nنص الإعلان:\n${incubatedResult.marketingPlan.adCopyPAS}\n\nقنوات الاستحواذ:\n${incubatedResult.marketingPlan.channelsStrategy.join('\n')}\n\n--- 4. النموذج المالي والتدفق النقدي (CFO) ---\nصافي التدفق الشهري: ${incubatedResult.financialModel.netMonthlyCashflow}\nتقييم التخارج: ${incubatedResult.financialModel.exitValuationYear1}\n\n--- 5. خطة العمل التنفيذية (30 يوماً) ---\n${incubatedResult.actionChecklist.map(a => `[${a.day}]: ${a.task}`).join('\n')}`;
+    downloadTextFileSafe('full-business-plan.txt', doc);
+    showToast('📥 تم تحميل خطة المشروع كاملة!');
   };
 
   const handleStartIncubation = (e) => {
@@ -55,22 +74,22 @@ export function AutonomousProjectIncubator({ userCredits, setUserCredits, onOpen
     setActiveAgentIndex(0);
 
     // Agent Simulation Steps
-    const step1 = setTimeout(() => {
+    setTimeout(() => {
       setActiveAgentIndex(1);
       setIncubationProgress(35);
-    }, 800);
+    }, 400);
 
-    const step2 = setTimeout(() => {
+    setTimeout(() => {
       setActiveAgentIndex(2);
       setIncubationProgress(65);
-    }, 1600);
+    }, 800);
 
-    const step3 = setTimeout(() => {
+    setTimeout(() => {
       setActiveAgentIndex(3);
       setIncubationProgress(90);
-    }, 2400);
+    }, 1200);
 
-    const stepFinal = setTimeout(() => {
+    setTimeout(() => {
       const result = incubateProjectIdea({
         idea: projectIdea,
         country: targetRegion,
@@ -79,14 +98,37 @@ export function AutonomousProjectIncubator({ userCredits, setUserCredits, onOpen
       });
       setIncubatedResult(result);
       setIncubationProgress(100);
+
+      // Save deliverable directly to Vault!
+      saveDeliverableToVault({
+        category: 'startup',
+        title: `دراسة مشروع: ${result.projectName}`,
+        summary: `خطة عمل تنفيذية متكاملة لـ (${projectIdea.slice(0, 50)}...) مع البنية التقنية والنموذج المالي`,
+        inputs: { projectIdea, targetRegion, budgetTier, targetCustomer },
+        outputs: {
+          rawText: `مشروع: ${result.projectName}\nالملخص: ${result.strategyReport.csoSummary}\nالتدفق النقدي: ${result.financialModel.netMonthlyCashflow}\nتقييم التخارج: ${result.financialModel.exitValuationYear1}`
+        },
+        downloadType: 'txt',
+        agentTeam: ['كبير مسؤولي الاستراتيجية CSO', 'كبير مسؤولي التقنية CTO', 'كبير مسؤولي التسويق CMO', 'كبير مسؤولي المالية CFO']
+      });
+
       setIsIncubating(false);
       confetti({ particleCount: 70, spread: 80, origin: { y: 0.6 } });
-    }, 3200);
+      showToast('🚀 تم تجسيد المشروع وحفظ الخطة الكاملة في مكتبة أعمالك!');
+    }, 1600);
   };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       
+      {/* Toast Alert */}
+      {toastMsg && (
+        <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-slate-900 border border-emerald-500/60 text-white px-5 py-2.5 rounded-2xl shadow-2xl backdrop-blur-xl flex items-center gap-2 text-xs sm:text-sm font-bold animate-bounce">
+          <Sparkles className="w-4 h-4 text-emerald-400" />
+          <span>{toastMsg}</span>
+        </div>
+      )}
+
       {/* Header */}
       <div className="text-center max-w-4xl mx-auto mb-12">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 text-indigo-300 text-xs font-bold border border-indigo-500/30 mb-4 shadow-inner">
@@ -267,11 +309,19 @@ export function AutonomousProjectIncubator({ userCredits, setUserCredits, onOpen
               </p>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
               <div className="p-3 bg-slate-950/80 rounded-2xl border border-slate-800 text-center">
                 <div className="text-[10px] text-slate-400">درجة الجاهزية للتنفيذ</div>
                 <div className="text-2xl font-black text-emerald-400 font-mono">{incubatedResult.strategicScore}/100</div>
               </div>
+
+              <button
+                onClick={downloadFullBlueprint}
+                className="px-3.5 py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs rounded-xl flex items-center gap-2 cursor-pointer transition-all border border-slate-700"
+              >
+                <Download className="w-4 h-4 text-cyan-400" />
+                <span>تحميل كملف .TXT</span>
+              </button>
 
               <button
                 onClick={() =>

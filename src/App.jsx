@@ -12,6 +12,7 @@ import { BlueprintModal } from './components/BlueprintModal';
 import { MobileAppGuideModal } from './components/MobileAppGuideModal';
 import { FounderAdminModal } from './components/FounderAdminModal';
 import { AuthModal } from './components/AuthModal';
+import { DeliverablesVaultModal } from './components/DeliverablesVaultModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { Footer } from './components/Footer';
 
@@ -33,6 +34,7 @@ export default function App() {
   const [founderHubOpen, setFounderHubOpen] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [authInitialMode, setAuthInitialMode] = useState('login');
+  const [vaultModalOpen, setVaultModalOpen] = useState(false);
 
   const handleOpenBlueprint = (sectionId = 'overview') => {
     setBlueprintSection(sectionId);
@@ -88,6 +90,7 @@ export default function App() {
               userCredits={userCredits}
               setUserCredits={setUserCredits}
               onOpenPricing={scrollToPricing}
+              onOpenVault={() => setVaultModalOpen(true)}
             />
           </div>
 
@@ -116,6 +119,7 @@ export default function App() {
             userCredits={userCredits}
             setUserCredits={setUserCredits}
             onOpenPricing={scrollToPricing}
+            onOpenVault={() => setVaultModalOpen(true)}
           />
         </div>
       )}
@@ -167,6 +171,7 @@ export default function App() {
         onOpenPricing={scrollToPricing}
         onOpenFounderHub={handleFounderHubClick}
         onOpenAuth={handleOpenUserAuth}
+        onOpenVault={() => setVaultModalOpen(true)}
       />
 
       {/* Main View Area */}
@@ -215,6 +220,12 @@ export default function App() {
         onOpenPricing={scrollToPricing}
       />
 
+      {/* Deliverables Vault Modal (مكتبة مخرجاتي ومنتجاتي الذكية) */}
+      <DeliverablesVaultModal
+        isOpen={vaultModalOpen}
+        onClose={() => setVaultModalOpen(false)}
+      />
+
       {/* User Login & Admin PIN Modal */}
       <AuthModal
         isOpen={authModalOpen}
@@ -256,6 +267,7 @@ export default function App() {
       <Footer
         onOpenBlueprint={handleOpenBlueprint}
         setActiveTab={setActiveTab}
+        onOpenVault={() => setVaultModalOpen(true)}
       />
 
     </div>

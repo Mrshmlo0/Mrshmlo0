@@ -9,7 +9,8 @@ import {
   Zap,
   Star,
   CheckCircle2,
-  Layers
+  Layers,
+  FolderArchive
 } from 'lucide-react';
 import { UltraVisualStudio } from './UltraVisualStudio';
 import { UltraMarketingStudio } from './UltraMarketingStudio';
@@ -80,7 +81,7 @@ const STUDIOS = [
   }
 ];
 
-export function UltraStudiosHub({ userCredits, setUserCredits, onOpenPricing, defaultStudio = 'visual' }) {
+export function UltraStudiosHub({ userCredits, setUserCredits, onOpenPricing, onOpenVault, defaultStudio = 'visual' }) {
   const [selectedStudio, setSelectedStudio] = useState(defaultStudio);
 
   const activeStudioObj = STUDIOS.find((s) => s.id === selectedStudio) || STUDIOS[0];
@@ -90,10 +91,23 @@ export function UltraStudiosHub({ userCredits, setUserCredits, onOpenPricing, de
       
       {/* Top Banner Hub */}
       <div className="text-center max-w-4xl mx-auto mb-10">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20 text-indigo-300 text-xs font-bold border border-indigo-500/30 mb-4 shadow-xl">
-          <Sparkles className="w-4 h-4 text-amber-300 animate-spin" />
-          <span>استوديوهات النخبة الخمسة - أعلى عائد وقيمة حقيقية</span>
+        <div className="flex items-center justify-center gap-2 mb-4 flex-wrap">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20 text-indigo-300 text-xs font-bold border border-indigo-500/30 shadow-xl">
+            <Sparkles className="w-4 h-4 text-amber-300 animate-spin" />
+            <span>استوديوهات النخبة الخمسة - أعلى عائد وقيمة حقيقية</span>
+          </div>
+
+          {onOpenVault && (
+            <button
+              onClick={onOpenVault}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-900 hover:bg-slate-800 text-indigo-300 hover:text-white text-xs font-bold border border-indigo-500/30 shadow-lg cursor-pointer transition-colors"
+            >
+              <FolderArchive className="w-3.5 h-3.5 text-indigo-400" />
+              <span>مكتبة مخرجاتي المحفوظة 🗄️</span>
+            </button>
+          )}
         </div>
+
         <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
           أقوى 5 استوديوهات ذكاء اصطناعي تفاعلية
         </h1>

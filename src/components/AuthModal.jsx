@@ -117,7 +117,7 @@ export function AuthModal({ isOpen, onClose, currentUser, setCurrentUser, onAdmi
           <form onSubmit={handleAdminPinSubmit} className="space-y-4">
             <div>
               <label className="block text-xs font-bold text-slate-300 mb-1.5">
-                الرمز السري لصاحب المشروع (Default PIN: 2026):
+                الرمز السري الخاص بالمالك والمؤسس:
               </label>
               <div className="relative">
                 <KeyRound className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
@@ -125,13 +125,13 @@ export function AuthModal({ isOpen, onClose, currentUser, setCurrentUser, onAdmi
                   type="password"
                   value={adminPin}
                   onChange={(e) => setAdminPin(e.target.value)}
-                  placeholder="أدخل الرمز (2026)..."
+                  placeholder="أدخل الرمز السري..."
                   className="w-full bg-slate-950 border border-slate-800 rounded-xl pr-10 pl-4 py-3 text-sm text-white focus:outline-none focus:border-amber-500"
                   autoFocus
                 />
               </div>
               {pinError && (
-                <p className="text-xs text-rose-400 mt-1.5 font-bold">⚠️ الرمز غير صحيح! جرب الرمز الافتراضي: 2026</p>
+                <p className="text-xs text-rose-400 mt-1.5 font-bold">⚠️ الرمز السري غير صحيح! يرجى التأكد من الرمز الخاص بك.</p>
               )}
             </div>
 

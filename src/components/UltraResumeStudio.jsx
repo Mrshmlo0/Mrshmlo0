@@ -11,10 +11,12 @@ import {
   User,
   GraduationCap,
   Award,
-  HelpCircle
+  HelpCircle,
+  Bot
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { copyToClipboardSafe, downloadTextFileSafe } from '../utils/clipboardAndDownload';
+import { saveDeliverableToVault } from '../utils/deliverablesVault';
 
 export function UltraResumeStudio({ userCredits, setUserCredits, onOpenPricing }) {
   const [fullName, setFullName] = useState('أحمد محمد المهدي');
@@ -24,6 +26,7 @@ export function UltraResumeStudio({ userCredits, setUserCredits, onOpenPricing }
   const [majorAchievement, setMajorAchievement] = useState('مضاعفة إيرادات متجر إلكتروني بنسبة 140% وخفض تكلفة اكتساب العميل CAC بنسبة 25%');
 
   const [isGenerating, setIsGenerating] = useState(false);
+  const [agentStep, setAgentStep] = useState('');
   const [generatedResume, setGeneratedResume] = useState(null);
   const [copiedKey, setCopiedKey] = useState(null);
   const [toastMsg, setToastMsg] = useState(null);
@@ -42,37 +45,66 @@ export function UltraResumeStudio({ userCredits, setUserCredits, onOpenPricing }
     }
     setUserCredits((prev) => Math.max(0, prev - 15));
     setIsGenerating(true);
+    setAgentStep('🔍 وكيل الفحص الآلي ATS: فحص الكلمات المفتاحية لمسمى (' + targetTitle.slice(0, 25) + ')...');
 
     setTimeout(() => {
-      setGeneratedResume({
-        name: fullName || 'المرشح المحترف',
-        title: targetTitle || 'المسمى الوظيفي المستهدف',
+      setAgentStep('✍️ وكيل الصياغة القياسية: تحويل الخبرات إلى نموذج هارفارد المعتمد (STAR Format)...');
+    }, 300);
+
+    setTimeout(() => {
+      setAgentStep('📄 وكيل التدقيق والتنسيق: مطابقة المعايير وهندسة رسالة التغطية الرسمية...');
+    }, 600);
+
+    setTimeout(() => {
+      const cleanName = fullName.trim() || 'المرشح المحترف';
+      const cleanTitle = targetTitle.trim() || 'المسمى الوظيفي المستهدف';
+      const cleanSkills = skills.split(',').map((s) => s.trim()).filter(Boolean);
+      const cleanAchieve = majorAchievement.trim();
+
+      const resumeObj = {
+        name: cleanName,
+        title: cleanTitle,
         atsScore: 98,
-        summary: `متخصص ومبتكر في مجال (${targetTitle}) بخبرة تتجاوز (${experienceLevel}) في قيادة استراتيجيات النمو، تعظيم العائد على الإنفاق الإعلاني (ROAS)، وتحسين معدلات التحويل الرقمي. يمتلك سجلاً حافلاً في إدارة الميزانيات وتوليد نمو بنسبة تزيد عن 140% عبر تفعيل استراتيجيات تعتمد على تحليل البيانات والأتمتة الذكية. متمكن من قيادة الفرق متعددة التخصصات وتحقيق أهداف المنظمة بكفاءة تشغيلية فائقة.`,
+        summary: `خبير ومبتكر في مجال (${cleanTitle}) بخبرة عملية (${experienceLevel}) في إدارة وتنفيذ المشروعات الحيوية، تحقيق مستهدفات النمو، وقيادة العمليات بأعلى كفاءة. يمتلك سجلاً حافلاً في تطبيق المهارات المتقدمة مثل (${cleanSkills.slice(0, 3).join('، ')}) مع قدرة استثنائية على قيادة فرق العمل وتحقيق نتائج قياسية ملموسة مثل (${cleanAchieve}). يتميز بالقدرة على التكيف السريع وحل المشكلات المعقدة بالاعتماد على البيانات والتخطيط الاستراتيجي.`,
         bullets: [
-          `قيادة وتطوير حملات متكاملة أسفرت عن: ${majorAchievement || 'تحقيق نمو بنسبة 35% في الإيرادات السنوية'}.`,
-          `إدارة وتوجيه فريق مكون من 7 متخصصين مع الحفاظ على معدل تسليم للمشاريع بلغ 99% في المواعيد المحددة.`,
-          `تنفيذ حلول أتمتة ذكية وفرت أكثر من 20 ساعة عمل أسبوعية للفريق ورفعت دقة التقارير الإدارية.`,
-          `تحليل مؤشرات الأداء الرئيسية (KPIs) وبناء لوحات بيانات تفاعلية لاتخاذ قرارات استثمارية دقيقة رفعت العائد بنسبة 32%.`
+          `قيادة وتطوير مبادرات استراتيجية أسفرت عن: ${cleanAchieve || 'تحقيق نمو بنسبة 45% في مؤشرات الأداء الإجمالية'}.`,
+          `تطبيق وتوظيف المهارات التقنية الأساسية (${cleanSkills.slice(0, 4).join(', ')}) لتحسين جودة وسرعة تسليم المشروعات بنسبة 35%.`,
+          `إدارة وتوجيه فرق العمل متعددة التخصصات مع الحفاظ على معدل إنجاز بلغ 99% في المواعيد المحددة وضمن الميزانية.`,
+          `تحليل مؤشرات الأداء الرئيسية (KPIs) وبناء استراتيجيات عمل مدروسة خفضت الهدر التشغيلي ووفرت أكثر من 20 ساعة أسبوعياً.`
         ],
-        skillsList: skills.split(',').map((s) => s.trim()).filter(Boolean),
-        coverLetter: `عناية مسؤول التوظيف المحترم،\n\nيسرني التقدم لشغل وظيفة (${targetTitle}) لديكم. من خلال اطلاعي على رؤية مؤسستكم وإنجازاتها، وجدت توافقاً تاماً بين متطلبات هذه الوظيفة وخبراتي العملية في قيادة استراتيجيات النمو وتحقيق نتائج رقمية ملموسة مثل (${majorAchievement}).\n\nأتطلع لمناقشة كيف يمكنني المساهمة في تسريع نمو فريقكم وتحقيق أهدافكم القادمة.\n\nوتفضلوا بقبول فائق الاحترام والتقدير،\n${fullName}`,
+        skillsList: cleanSkills.length > 0 ? cleanSkills : ['القيادة الاستراتيجية', 'إدارة المشاريع', 'تحليل البيانات', 'التواصل الفعال'],
+        coverLetter: `عناية مسؤول التوظيف المحترم،\n\nيسرني ويشرفني التقدم لشغل وظيفة (${cleanTitle}) في مؤسستكم الرائدة. من خلال اطلاعي المستمر على إنجازاتكم وتطلعاتكم المستقبلية، وجدت توافقاً تاماً بين متطلبات هذه الوظيفة وخبراتي العملية التي أثبتت نجاحاً ملموساً في تحقيق (${cleanAchieve}).\n\nبفضل تمكني من (${cleanSkills.slice(0, 3).join('، ')})، أنا على ثقة تامة بقدرتي على إحداث إضافة فورية وقيمة لفرق عملكم وتسريع تحقيق الأهداف الاستراتيجية.\n\nأتطلع للقائكم في مقابلة شخصية لمناقشة أوجه التعاون بمزيد من التفصيل.\n\nوتفضلوا بقبول فائق التقدير والاحترام،\n${cleanName}`,
         interviewQuestions: [
           {
-            q: `كيف تتعامل مع انخفاض مفاجئ في مؤشرات الأداء أو أرباح الحملات؟`,
-            answer: `أقوم فوراً بتشريح قمع التحويل (Funnel Breakdown)، فحص جودة الجمهور المستهدف وسرعة تجربة العميل، وإجراء اختبارات A/B سريعة لتصحيح المسار خلال 24 ساعة.`
+            q: `كيف وظفت مهاراتك في (${cleanSkills[0] || 'مجال تخصصك'}) لتحقيق إنجاز مثل (${cleanAchieve.slice(0, 30)}...)؟`,
+            answer: `قمت بدراسة الوضع الراهن وتحديد الفجوات بدقة، ثم وضعت خطة تنفيذية تركز على الأولويات مع القياس الدوري للنتائج لضمان تحقيق المستهدف في أسرع وقت.`
           },
           {
-            q: `حدثنا عن مشروع معقد قدته بالاعتماد على أدوات الذكاء الاصطناعي والأتمتة؟`,
-            answer: `استخدمت أنظمة الأتمتة الذكية لربط خدمة العملاء بالمبيعات، مما خفض وقت الاستجابة إلى ثوانٍ معدودة وضاعف نسبة إغلاق الصفقات بـ 3 أضعاف.`
+            q: `كيف تتعامل مع ضغوط العمل والمواعيد الضيقة في بيئة مشروعات سريعة النمو؟`,
+            answer: `أعتمد على إدارة الوقت وتفويض المهام بحسب نقاط القوة، مع استخدام أدوات الأتمتة لتقليل المهام الروتينية والتركيز على القرارات ذات العائد الأعلى.`
           }
         ]
+      };
+
+      setGeneratedResume(resumeObj);
+
+      // Save deliverable directly to Vault!
+      saveDeliverableToVault({
+        category: 'resume',
+        title: `سيرة هارفارد ATS: ${cleanName} - ${cleanTitle}`,
+        summary: `سيرة ذاتية متوافقة 98% مع ATS ورسالة تغطية لـ (${cleanTitle}) مع إنجاز: ${cleanAchieve.slice(0, 40)}`,
+        inputs: { fullName: cleanName, targetTitle: cleanTitle, skills, majorAchievement },
+        outputs: {
+          rawText: `${cleanName}\n${cleanTitle}\nATS Score: 98%\n\n=== الملخص المهني ===\n${resumeObj.summary}\n\n=== الإنجازات والخبرات (STAR) ===\n${resumeObj.bullets.join('\n')}\n\n=== المهارات ===\n${resumeObj.skillsList.join(', ')}\n\n=== خطاب التغطية ===\n${resumeObj.coverLetter}`
+        },
+        downloadType: 'pdf',
+        agentTeam: ['وكيل الفحص الآلي ATS 🔍', 'وكيل الصياغة المهنية هارفارد 🎓', 'وكيل الإعداد للمقابلات 💼']
       });
 
       setIsGenerating(false);
       confetti({ particleCount: 50, spread: 70, origin: { y: 0.7 } });
-      showToast('🎯 تم بناء السيرة الذاتية بنظام ATS المتوافق مع معايير Harvard!');
-    }, 600);
+      showToast('🎯 تم بناء السيرة الذاتية وحفظها في مكتبة أعمالك بنجاح!');
+    }, 900);
   };
 
   const handlePrint = () => {
@@ -175,7 +207,7 @@ export function UltraResumeStudio({ userCredits, setUserCredits, onOpenPricing }
               {isGenerating ? (
                 <>
                   <Sparkles className="w-5 h-5 animate-spin text-amber-200" />
-                  <span>جاري ضبط صياغة الـ ATS والمعايير الدولية...</span>
+                  <span>{agentStep || 'جاري ضبط صياغة الـ ATS والمعايير الدولية...'}</span>
                 </>
               ) : (
                 <>

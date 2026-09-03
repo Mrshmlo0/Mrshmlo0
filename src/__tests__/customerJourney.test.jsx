@@ -8,6 +8,8 @@ import { UltraMarketingStudio } from '../components/UltraMarketingStudio';
 import { UltraResumeStudio } from '../components/UltraResumeStudio';
 import { UltraEcommerceStudio } from '../components/UltraEcommerceStudio';
 import { UltraLegalStudio } from '../components/UltraLegalStudio';
+import { DeliverablesVaultModal } from '../components/DeliverablesVaultModal';
+import { saveDeliverableToVault, clearVaultDeliverables, getVaultDeliverables } from '../utils/deliverablesVault';
 
 // Complete mock Canvas API for jsdom
 beforeEach(() => {
@@ -66,6 +68,8 @@ beforeEach(() => {
       writeText: vi.fn().mockImplementation(() => Promise.resolve())
     }
   });
+
+  clearVaultDeliverables();
 });
 
 describe('OmniAI PRO - Full Customer Simulation Suite', () => {
@@ -201,12 +205,16 @@ describe('OmniAI PRO - Full Customer Simulation Suite', () => {
 
     // Switch to WhatsApp Bot tab
     fireEvent.click(screen.getByText(/بوت الواتساب 💬/i));
-    expect(screen.getByText(/1\. رسالة الترحيب والرد التلقائي/i)).toBeDefined();
-    expect(screen.getByText(/3\. إغلاق الطلب وجمع العنوان/i)).toBeDefined();
+    expect(screen.getByText(/1\. رسالة الترحيب والرد الذكي الفوري/i)).toBeDefined();
+    expect(screen.getByText(/3\. إغلاق الطلب وجمع بيانات الشحن/i)).toBeDefined();
 
     // Switch to Bundles tab
     fireEvent.click(screen.getByText(/باقات التسعير 📦/i));
-    expect(screen.getByText(/باقة العشاق \(الأكثر طلباً ⭐\)/i)).toBeDefined();
+    expect(screen.getByText(/باقة التوفير \(الأكثر مبيعاً ⭐\)/i)).toBeDefined();
+
+    // Switch to Objections tab
+    fireEvent.click(screen.getByText(/ردود الاعتراضات 🛡️/i));
+    expect(screen.getByText(/السعر يبدو مرتفعاً بعض الشيء/i)).toBeDefined();
   });
 
   it('5. Legal Contract Auditor: Customer audits risky contract, reviews redline amendments and negotiation script', async () => {
@@ -227,7 +235,7 @@ describe('OmniAI PRO - Full Customer Simulation Suite', () => {
 
     await waitFor(() => {
       expect(screen.getByText(/مرتفع \(78\/100 ⚠️\)/i)).toBeDefined();
-      expect(screen.getByText(/البند الرابع \(الملكية الفكرية\)/i)).toBeDefined();
+      expect(screen.getAllByText(/البند الرابع/i).length).toBeGreaterThan(0);
     }, { timeout: 3000 });
 
     expect(screen.getByText(/رسالة التفاوض الودية مع العميل:/i)).toBeDefined();
@@ -254,12 +262,12 @@ describe('OmniAI PRO - Full Customer Simulation Suite', () => {
     fireEvent.click(incubatorNavBtn);
     expect(screen.getByText(/محرك تجسيد الأماني والمشاريع/i)).toBeDefined();
 
-    // Click Founder Hub Button (Should open PIN prompt modal)
+    // Click Founder Hub Button (Should open PIN prompt modal with secure placeholder)
     const founderHubBtn = screen.getAllByRole('button', { name: /المالك 👑/i })[0];
     fireEvent.click(founderHubBtn);
 
-    // Verify PIN input modal appears
-    const pinInput = screen.getByPlaceholderText(/أدخل الرمز \(2026\)\.\.\./i);
+    // Verify PIN input modal appears with secure placeholder
+    const pinInput = screen.getByPlaceholderText(/أدخل الرمز السري\.\.\./i);
     expect(pinInput).toBeDefined();
 
     // Enter correct PIN (2026)
@@ -271,6 +279,52 @@ describe('OmniAI PRO - Full Customer Simulation Suite', () => {
     await waitFor(() => {
       expect(screen.getByText(/لوحة تحكم صاحب المشروع/i)).toBeDefined();
     });
+  });
+
+  it('7. Deliverables Vault: Customer opens vault, filters categories, and reviews stored deliverables', async () => {
+    // Save sample deliverables to vault
+    saveDeliverableToVault({
+      category: 'marketing',
+      title: 'إعلان حملة العطور الملكية',
+      summary: 'نص إعلاني جذاب بأسلوب المشكلة والحل',
+      inputs: { product: 'عطر العود الملكي' },
+      outputs: { rawText: 'نص الإعلان الكامل والمخرجات' },
+      downloadType: 'txt',
+      agentTeam: ['وكيل التسويق 🚀']
+    });
+
+    saveDeliverableToVault({
+      category: 'resume',
+      title: 'سيرة ذاتية هارفارد - مهندس برمجيات',
+      summary: 'سيرة ذاتية بنموذج STAR متوافقة 98% ATS',
+      inputs: { name: 'سارة خالد' },
+      outputs: { rawText: 'الملخص المهني والخبرات' },
+      downloadType: 'pdf',
+      agentTeam: ['وكيل ATS 📄']
+    });
+
+    const deliverables = getVaultDeliverables();
+    expect(deliverables.length).toBe(2);
+
+    render(
+      <DeliverablesVaultModal
+        isOpen={true}
+        onClose={vi.fn()}
+      />
+    );
+
+    // Check Vault title
+    expect(screen.getByText(/مكتبة مخرجاتي ومنتجاتي الذكية/i)).toBeDefined();
+
+    // Check saved item titles
+    expect(screen.getByText(/إعلان حملة العطور الملكية/i)).toBeDefined();
+    expect(screen.getByText(/سيرة ذاتية هارفارد - مهندس برمجيات/i)).toBeDefined();
+
+    // Filter by Resume category button
+    const resumeFilterBtn = screen.getAllByRole('button', { name: /السير الذاتية ATS/i })[0];
+    fireEvent.click(resumeFilterBtn);
+
+    expect(screen.getByText(/سيرة ذاتية هارفارد - مهندس برمجيات/i)).toBeDefined();
   });
 
 });

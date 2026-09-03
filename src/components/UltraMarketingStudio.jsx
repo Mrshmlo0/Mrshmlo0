@@ -11,10 +11,12 @@ import {
   Zap,
   Flame,
   CheckCircle2,
-  FileText
+  FileText,
+  Bot
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { copyToClipboardSafe, downloadTextFileSafe } from '../utils/clipboardAndDownload';
+import { saveDeliverableToVault } from '../utils/deliverablesVault';
 
 export function UltraMarketingStudio({ userCredits, setUserCredits, onOpenPricing }) {
   const [productName, setProductName] = useState('منصة ذكاء اصطناعي لأتمتة ردود ومبيعات المتاجر على واتساب');
@@ -23,6 +25,7 @@ export function UltraMarketingStudio({ userCredits, setUserCredits, onOpenPricin
   const [activeTab, setActiveTab] = useState('ads'); // 'ads' | 'calendar' | 'targeting'
 
   const [isGenerating, setIsGenerating] = useState(false);
+  const [agentStep, setAgentStep] = useState('');
   const [generatedCampaign, setGeneratedCampaign] = useState(null);
   const [copiedKey, setCopiedKey] = useState(null);
   const [toastMsg, setToastMsg] = useState(null);
@@ -41,55 +44,87 @@ export function UltraMarketingStudio({ userCredits, setUserCredits, onOpenPricin
     }
     setUserCredits((prev) => Math.max(0, prev - 15));
     setIsGenerating(true);
+    setAgentStep('🧠 وكيل علم النفس التسويقي: استخراج نقاط الألم العميقة لـ (' + targetAudience.slice(0, 25) + ')...');
 
     setTimeout(() => {
-      setGeneratedCampaign({
+      setAgentStep('✍️ وكيل الصياغة الإعلانية: كتابة نماذج PAS و AIDA و Hook المخصصة...');
+    }, 300);
+
+    setTimeout(() => {
+      setAgentStep('📅 وكيل استراتيجية المحتوى: بناء تقويم النشر لـ 30 يوماً وتوزيع الاستهداف...');
+    }, 600);
+
+    setTimeout(() => {
+      const cleanProd = productName.trim();
+      const cleanAudience = targetAudience.trim();
+      const cleanOffer = campaignOffer.trim();
+
+      const campaignData = {
         generatedAt: new Date().toLocaleTimeString('ar-EG'),
         variants: [
           {
-            title: "الخيار الأول: نموذج الفضول والألم (PAS Framework)",
+            title: "الخيار الأول: نموذج الفضول ونقاط الألم (PAS Framework)",
             badge: "الأعلى نقراً (High CTR)",
-            hook: "🔥 85% من عملاء متجرك يغادرون دون شراء لنفس هذا السبب الصامت...",
-            body: `❌ **المشكلة:** تنفق آلاف الريالات على الإعلانات، ولكن عندما يرسل العميل استفساراً على واتساب وينتظر أكثر من دقيقة.. يذهب فوراً لمنافسك!\n\n⚠️ **التهويل:** تكلفة الإعلانات ترتفع يومياً، والرد اليدوي يضيع عليك صفقات مؤكدة كل ساعة.\n\n✅ **الحل:** مع ${productName}، يحصل متجرك على بوت مبيعات ذكي يرد في أجزاء من الثانية، يوصي بالمنتجات، ويغلق الطلبات 24 ساعة يومياً بدون توقف!\n\n⭐ ${campaignOffer}`,
-            cta: "👉 اضغط على الرابط الآن وابدأ تجربتك المجانية في أقل من دقيقة!",
-            hashtags: "#تجارة_إلكترونية #متاجر_سلة #زد #شوبيفاي #زيادة_المبيعات"
+            hook: `🔥 85% من عملاء (${cleanAudience}) يغادرون دون إتمام الطلب لنفس هذا السبب الصامت...`,
+            body: `❌ **المشكلة:** تنفق ميزانيات طائلة لجذب العملاء إلى (${cleanProd})، ولكن عندما ينتظر العميل أكثر من دقيقة للرد أو المتابعة.. يذهب فوراً لمنافسك!\n\n⚠️ **التهويل:** تكلفة الإعلانات ترتفع يومياً، والاعتماد على الطرق التقليدية يضيع عليك صفقات مؤكدة وأرباحاً حقيقية كل ساعة.\n\n✅ **الحل:** مع (${cleanProd})، ستحصل على نظام متطور يعمل في أجزاء من الثانية لخدمة عملائك، وتوجيههم للشراء، وحسم الصفقات 24/7 دون أي توقف.\n\n⭐ **العرض الحصري:** ${cleanOffer}`,
+            cta: `👉 اضغط على الرابط الآن وابدأ الاستفادة من ${cleanProd} قبل نهاية العرض!`,
+            hashtags: `#${cleanProd.split(' ')[0] || 'تسويق'} #أعمال #نمو_المبيعات #تجارة #نجاح`
           },
           {
-            title: "الخيار الثاني: نموذج الإثبات الاجتماعي والمكسب (AIDA Framework)",
+            title: "الخيار الثاني: نموذج الإثبات والمكسب السريع (AIDA Framework)",
             badge: "الأعلى مبيعاً (High Conversion)",
-            hook: "🚀 كيف ضاعف هذا المتجر مبيعاته 3 أضعاف في أول 30 يوماً؟",
-            body: `هل تعلم أن الرد الفوري خلال 60 ثانية يرفع نسبة إغلاق الصفقات بنسبة 391%؟\n\nنقدم لك ${productName}، الحل الذي يثق به أكثر من 1,500 تاجر لأتمتة مبيعاتهم بالكامل.\n\n**أهم المزايا الحصرية:**\n• رد ذكي فوري بالأسعار ومواصفات المنتجات بلهجات محلية.\n• حفظ السلات المتروكة وتذكير العميل تلقائياً.\n• ربط سهل بضغطة زر واحدة مع متجرك.\n\n🎁 ${campaignOffer}`,
-            cta: "🛒 اشترك الآن واستفد من العرض الحصري قبل نهاية الشهر!",
-            hashtags: "#أتمتة_المتاجر #تسويق_ذكي #أرباح #توسع_الأعمال"
+            hook: `🚀 كيف يمكنك مضاعفة نتائج ومبيعات (${cleanProd}) 3 أضعاف خلال 30 يوماً فقط؟`,
+            body: `هل تعلم أن سرعة الاستجابة المباشرة ترفع نسبة إغلاق الصفقات بين (${cleanAudience}) بأكثر من 390%؟\n\nنقدم لك (${cleanProd})، الحل المتكامل الذي صُمم خصيصاً ليمنحك التفوق والسيطرة في سوقك.\n\n**أهم المزايا الحصرية التي ستحصل عليها فوراً:**\n• دقة واحترافية فائقة في تلبية متطلبات الجمهور.\n• توفير أكثر من 70% من الوقت والجهد المبذول.\n• تقارير ومؤشرات أداء واضحة لاتخاذ قرارات ربحية مدروسة.\n\n🎁 **هدية خاصة لفترة محدودة:** ${cleanOffer}`,
+            cta: `🛒 اضغط هنا فوراً واشترك في ${cleanProd} بأفضل سعر متاح!`,
+            hashtags: `#أرباح #${cleanProd.split(' ')[0] || 'بزنس'} #استثمار #تسويق_رقمي #ريادة_أعمال`
           },
           {
-            title: "الخيار الثالث: الإعلان السريع المباشر (Short Punchy Hook)",
+            title: "الخيار الثالث: الإعلان القصير الفيروسي (Short Punchy Hook)",
             badge: "لتيك توك وإنستغرام ريلز",
-            hook: "⚡ توقف عن الرد اليدوي وإهدار وقتك في المبيعات!",
-            body: `دع الذكاء الاصطناعي يبيع لعملائك على مدار الساعة وأنت نائم.\n\n${productName} يمنحك القوة لخدمة آلاف العملاء في نفس اللحظة بأعلى دقة واحترافية.\n\n🔥 ${campaignOffer}`,
-            cta: "👇 اكتب كلمة 'تجربة' في التعليقات وسنرسل لك رابط التفعيل فوراً على الخاص!",
-            hashtags: "#ريلز #تيك_توك #بزنس #أتمتة #ريادة_أعمال"
+            hook: `⚡ توقف تماماً عن إهدار وقتك وميزانيتك بدون نتائج واضحة!`,
+            body: `إذا كنت من (${cleanAudience})، فهذه الرسالة موجهة لك تحديداً.\n\n(${cleanProd}) يمنحك القوة لتوسيع عملك وجذب عملاء جاهزين للشراء على مدار الساعة.\n\n🔥 **المفاجأة:** ${cleanOffer}`,
+            cta: `👇 اكتب كلمة 'مهتم' في التعليقات أو انقر على الرابط لتفعيل حسابك فوراً!`,
+            hashtags: `#ريلز #تيك_توك #ريادة #${cleanProd.split(' ')[0] || 'ريلز'}`
           }
         ],
         calendar: [
-          { day: "اليوم 1", platform: "LinkedIn / X", hook: "لماذا تفشل 70% من الحملات الإعلانية في إغلاق الصفقات؟", topic: "مقال تعليمي يشرح أهمية سرعة الرد في التجارة الإلكترونية." },
-          { day: "اليوم 3", platform: "Instagram / TikTok", hook: "مقارنة حية: الرد البشري البطيء مقابل روبوت الذكاء الاصطناعي ⚡", topic: "فيديو قصير 30 ثانية يوضح تجربة العميل السريعة." },
-          { day: "اليوم 5", platform: "جميع المنصات", hook: "دراسة حالة: متجر عطور رفع مبيعاته 210% بكود خصم آلي!", topic: "قصة نجاح بالأرقام تثبت القيمة للعميل." },
-          { day: "اليوم 7", platform: "X / Twitter", hook: "ثرد: 4 أدوات ذكاء اصطناعي يجب أن يمتلكها كل تاجر في 2026", topic: "ثرد مفصل يعرض المنصة كأداة أساسية." },
-          { day: "اليوم 10", platform: "Meta Ads", hook: "عرض الأسبوع: احصل على 7 أيام مجاناً وجرب بنفسك!", topic: "حملة إعلانية ممولة لإعادة الاستهداف." }
+          { day: "اليوم 1", platform: "LinkedIn / X", hook: `لماذا تفشل معظم محاولات (${cleanAudience}) في تحقيق العائد المتوقع؟`, topic: `مقال استراتيجي يشرح الفجوة التي يسدها ${cleanProd}.` },
+          { day: "اليوم 3", platform: "Instagram / TikTok", hook: `مقارنة حية بالأرقام: قبل وبعد استخدام (${cleanProd}) ⚡`, topic: `فيديو قصير 30 ثانية يبرز النتائج والسرعة.` },
+          { day: "اليوم 5", platform: "جميع المنصات", hook: `دراسة حالة: كيف حقق هذا العميل نمواً كبيراً باستخدام ${cleanProd}؟`, topic: `قصة نجاح مبنية على الأرقام والنتائج الفعلية.` },
+          { day: "اليوم 7", platform: "X / Twitter", hook: `ثرد: 5 أسرار يجب أن يعرفها كل من يستهدف (${cleanAudience}) في 2026`, topic: `ثريد تعليمي يدمج المنصة كأداة لا غنى عنها.` },
+          { day: "اليوم 10", platform: "Meta Ads", hook: `عرض الأسبوع الحصري: ${cleanOffer}`, topic: `حملة إعلانية ممولة لإعادة الاستهداف وتوليد المبيعات.` }
         ],
         targeting: {
-          demographics: "رجال ونساء (22 - 50 سنة) في السعودية، الإمارات، الكويت، مصر.",
-          interests: "Shopify, Salla, Zid, Digital Marketing, E-commerce, Retail, Entrepreneurship.",
-          exclusions: "المهتمين فقط بالمنتجات المجانية بدون بطاقات دفع.",
-          budgetRecommendation: "البدء بـ 20$ - 50$/يوم لاختبار الخيار الأول والثاني معاً (A/B Testing)."
+          demographics: `رجال ونساء (22 - 50 سنة) مهتمون بمجال (${cleanProd}) والنمو التجاري في السعودية، الخليج، ومصر.`,
+          interests: `${cleanProd.split(' ')[0] || 'Digital Marketing'}, Business Growth, E-commerce, Retail, Entrepreneurship.`,
+          exclusions: "الحسابات الوهمية والمهتمين بالخدمات المجانية فقط.",
+          budgetRecommendation: "البدء بميزانية تجريبية 25$ - 50$/يوم لاختبار الخيار الأول والثاني معاً (A/B Testing)."
         }
+      };
+
+      setGeneratedCampaign(campaignData);
+
+      // Save deliverable directly to Vault!
+      saveDeliverableToVault({
+        category: 'marketing',
+        title: `حملة تسويقية: ${cleanProd}`,
+        summary: `3 صياغات إعلانية + جدول محتوى 30 يوم لـ (${cleanAudience}) مع عرض: ${cleanOffer}`,
+        inputs: { productName: cleanProd, targetAudience: cleanAudience, campaignOffer: cleanOffer },
+        outputs: {
+          primaryHook: campaignData.variants[0].hook,
+          fullContent: campaignData.variants.map(v => `${v.title}\n${v.hook}\n${v.body}\n${v.cta}`).join('\n\n---\n\n'),
+          callToAction: campaignData.variants[0].cta,
+          hashtags: campaignData.variants[0].hashtags,
+          rawText: `=== خطة الحملة التسويقية ===\nالمنتج: ${cleanProd}\nالجمهور: ${cleanAudience}\n\n${campaignData.variants.map(v => `--- ${v.title} ---\n${v.hook}\n\n${v.body}\n\n${v.cta}\n`).join('\n')}\n\n=== جدول المحتوى ===\n${campaignData.calendar.map(c => `${c.day} [${c.platform}]: ${c.hook}`).join('\n')}`
+        },
+        downloadType: 'txt',
+        agentTeam: ['وكيل علم النفس التسويقي 🧠', 'وكيل الصياغة المباشرة ✍️', 'وكيل الاستهداف والتقويم 🎯']
       });
 
       setIsGenerating(false);
       confetti({ particleCount: 50, spread: 70, origin: { y: 0.7 } });
-      showToast('✨ تم توليد خطة الحملة التسويقية المتكاملة بنجاح!');
-    }, 600);
+      showToast('✨ تم توليد خطة الحملة وحفظها في مكتبة أعمالك بنجاح!');
+    }, 900);
   };
 
   const copyText = (key, text) => {
@@ -102,9 +137,13 @@ export function UltraMarketingStudio({ userCredits, setUserCredits, onOpenPricin
 
   const downloadFullCampaign = () => {
     if (!generatedCampaign) return;
-    let fullDoc = `=== خطة الحملة التسويقية المتكاملة ===\nتاريخ التوليد: ${generatedCampaign.generatedAt}\n\n`;
-    generatedCampaign.variants.forEach((v, i) => {
+    let fullDoc = `=== خطة الحملة التسويقية المتكاملة ===\nالمنتج: ${productName}\nالجمهور: ${targetAudience}\nتاريخ التوليد: ${generatedCampaign.generatedAt}\n\n`;
+    generatedCampaign.variants.forEach((v) => {
       fullDoc += `--- ${v.title} ---\n${v.hook}\n\n${v.body}\n\n${v.cta}\n\n${v.hashtags}\n\n`;
+    });
+    fullDoc += `\n=== جدول المحتوى المقترح ===\n`;
+    generatedCampaign.calendar.forEach((c) => {
+      fullDoc += `${c.day} [${c.platform}]: ${c.hook} (${c.topic})\n`;
     });
     fullDoc += `\n=== الجمهور والاستهداف ===\nالديموغرافيا: ${generatedCampaign.targeting.demographics}\nالاهتمامات: ${generatedCampaign.targeting.interests}\nالميزانية: ${generatedCampaign.targeting.budgetRecommendation}\n`;
 
@@ -181,7 +220,7 @@ export function UltraMarketingStudio({ userCredits, setUserCredits, onOpenPricin
               {isGenerating ? (
                 <>
                   <Sparkles className="w-5 h-5 animate-spin text-amber-300" />
-                  <span>جاري كتابة وهندسة الحملة التسويقية...</span>
+                  <span>{agentStep || 'جاري كتابة وهندسة الحملة التسويقية...'}</span>
                 </>
               ) : (
                 <>

@@ -15,12 +15,14 @@ import {
   Star,
   Image as ImageIcon,
   CheckCircle2,
-  Layers
+  Layers,
+  Archive
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { executeUniversalService } from '../data/allServicesData';
 import { copyToClipboardSafe, downloadTextFileSafe } from '../utils/clipboardAndDownload';
 import { RealImageGenerator } from './RealImageGenerator';
+import { saveDeliverableToVault } from '../utils/deliverablesVault';
 
 export function UnifiedServiceModal({ service, isOpen, onClose, userCredits, setUserCredits, onOpenPricing }) {
   const [formData, setFormData] = useState({});
@@ -64,9 +66,23 @@ export function UnifiedServiceModal({ service, isOpen, onClose, userCredits, set
         inputData: formData
       });
       setGenerationResult(res);
+
+      // Auto archive deliverable to Vault
+      saveDeliverableToVault({
+        category: service.category || 'marketing',
+        title: `${service.title} - ${formData[service.fields?.[0]?.name] || 'مخرجات متكاملة'}`,
+        summary: res.output?.primaryHook || res.output?.title || 'مخرج ذكي جاهز للاستخدام',
+        inputs: formData,
+        outputs: {
+          rawText: `${res.output.title}\n\n${res.output.primaryHook}\n\n${res.output.fullContent}\n\n${res.output.callToAction}\n\n${res.output.hashtags}`
+        },
+        downloadType: 'txt',
+        agentTeam: [`محرك التوليد الفائق ${service.title}`, 'وكيل التدقيق الذاتي 99.8%']
+      });
+
       setIsGenerating(false);
       confetti({ particleCount: 45, spread: 60, origin: { y: 0.7 } });
-      showToast('✨ تم التوليد بنجاح وجاهز للاستخدام الفوري!');
+      showToast('✨ تم التوليد بنجاح وحفظ المخرج في مكتبة أعمالك!');
     }, delay);
   };
 

@@ -1,7 +1,21 @@
-import React from 'react';
-import { Sparkles, Crown, Grid, Brain, Activity, Layers, ShieldCheck, User, Lock, Star } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Sparkles, Crown, Grid, Brain, Activity, Layers, ShieldCheck, User, Lock, Star, FolderArchive, Archive } from 'lucide-react';
+import { getVaultDeliverables } from '../utils/deliverablesVault';
 
-export function Navbar({ activeTab, setActiveTab, userCredits, currentUser, onOpenPricing, onOpenFounderHub, onOpenAuth }) {
+export function Navbar({ activeTab, setActiveTab, userCredits, currentUser, onOpenPricing, onOpenFounderHub, onOpenAuth, onOpenVault }) {
+  const [vaultCount, setVaultCount] = useState(0);
+
+  useEffect(() => {
+    const updateCount = () => {
+      const items = getVaultDeliverables();
+      setVaultCount(items.length);
+    };
+
+    updateCount();
+    window.addEventListener('omni_vault_updated', updateCount);
+    return () => window.removeEventListener('omni_vault_updated', updateCount);
+  }, []);
+
   return (
     <header className="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-2xl border-b border-slate-800/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
@@ -96,8 +110,22 @@ export function Navbar({ activeTab, setActiveTab, userCredits, currentUser, onOp
           </button>
         </nav>
 
-        {/* User Credits, Auth, Founder Hub & Pricing CTA */}
+        {/* User Credits, Vault, Auth, Founder Hub & Pricing CTA */}
         <div className="flex items-center gap-2">
+          
+          {/* Deliverables Vault Button */}
+          <button
+            onClick={onOpenVault}
+            className="flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-indigo-950/80 to-purple-950/80 hover:from-indigo-900 hover:to-purple-900 border border-indigo-500/40 text-indigo-300 hover:text-white rounded-xl text-xs font-bold transition-all cursor-pointer shadow-lg shadow-indigo-950/40"
+            title="مكتبة مخرجاتي ومنتجاتي الذكية"
+          >
+            <FolderArchive className="w-4 h-4 text-indigo-400" />
+            <span className="hidden sm:inline">مكتبة مخرجاتي</span>
+            <span className="px-1.5 py-0.5 rounded-full text-[10px] font-black bg-indigo-500/30 text-indigo-200 border border-indigo-400/40 font-mono">
+              {vaultCount}
+            </span>
+          </button>
+
           {/* Credit balance display */}
           <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-xl">
             <div className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />

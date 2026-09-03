@@ -13,10 +13,13 @@ import {
   Zap,
   Tag,
   Type,
-  Maximize2
+  Maximize2,
+  FolderDown,
+  Bot
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { copyToClipboardSafe, downloadCanvasImage } from '../utils/clipboardAndDownload';
+import { saveDeliverableToVault } from '../utils/deliverablesVault';
 
 export function UltraVisualStudio({ userCredits, setUserCredits, onOpenPricing }) {
   const canvasRef = useRef(null);
@@ -28,6 +31,7 @@ export function UltraVisualStudio({ userCredits, setUserCredits, onOpenPricing }
   const [showTextOverlay, setShowTextOverlay] = useState(true);
 
   const [isGenerating, setIsGenerating] = useState(false);
+  const [agentStep, setAgentStep] = useState('');
   const [copiedPrompt, setCopiedPrompt] = useState(false);
   const [copiedDalle, setCopiedDalle] = useState(false);
   const [toastMsg, setToastMsg] = useState(null);
@@ -41,11 +45,12 @@ export function UltraVisualStudio({ userCredits, setUserCredits, onOpenPricing }
 
   const dallePrompt = `Ultra-detailed commercial studio advertising shot of ${promptInput}. High-end product photography, dramatic lighting, crisp reflections, 8k resolution, clean modern aesthetic.`;
 
-  // Draw procedural canvas artwork
+  // Draw procedural canvas artwork dynamically based on user inputs
   const renderCanvas = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
     // Dimensions based on aspect ratio
     let w = 800;
@@ -57,7 +62,7 @@ export function UltraVisualStudio({ userCredits, setUserCredits, onOpenPricing }
     canvas.width = w;
     canvas.height = h;
 
-    // 1. Background Gradient
+    // 1. Background Gradient tailored to style
     if (stylePreset === 'luxury') {
       const bg = ctx.createLinearGradient(0, 0, w, h);
       bg.addColorStop(0, '#0a0a0f');
@@ -74,7 +79,11 @@ export function UltraVisualStudio({ userCredits, setUserCredits, onOpenPricing }
 
       ctx.beginPath();
       ctx.moveTo(0, h * 0.65);
-      ctx.bezierCurveTo(w * 0.3, h * 0.5, w * 0.7, h * 0.7, w, h * 0.6);
+      if (ctx.bezierCurveTo) {
+        ctx.bezierCurveTo(w * 0.3, h * 0.5, w * 0.7, h * 0.7, w, h * 0.6);
+      } else {
+        ctx.lineTo(w, h * 0.6);
+      }
       ctx.lineTo(w, h);
       ctx.lineTo(0, h);
       ctx.fillStyle = goldGrad;
@@ -90,7 +99,7 @@ export function UltraVisualStudio({ userCredits, setUserCredits, onOpenPricing }
       ctx.arc(w * 0.5, h * 0.3, w * 0.4, 0, Math.PI * 2);
       ctx.fill();
 
-      // Product Glass Silhoutte
+      // Product Glass Silhouette
       const bx = w * 0.5;
       const by = h * 0.55;
       const bw = w * 0.22;
@@ -98,7 +107,9 @@ export function UltraVisualStudio({ userCredits, setUserCredits, onOpenPricing }
 
       ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
       ctx.beginPath();
-      ctx.ellipse(bx, by + bh * 0.5 + 10, bw * 0.6, 18, 0, 0, Math.PI * 2);
+      if (ctx.ellipse) {
+        ctx.ellipse(bx, by + bh * 0.5 + 10, bw * 0.6, 18, 0, 0, Math.PI * 2);
+      }
       ctx.fill();
 
       // Glass Bottle
@@ -112,14 +123,20 @@ export function UltraVisualStudio({ userCredits, setUserCredits, onOpenPricing }
       ctx.strokeStyle = '#fff';
       ctx.lineWidth = 2.5;
       ctx.beginPath();
-      ctx.roundRect(bx - bw/2, by - bh/2, bw, bh, 18);
+      if (ctx.roundRect) {
+        ctx.roundRect(bx - bw/2, by - bh/2, bw, bh, 18);
+      } else {
+        ctx.rect(bx - bw/2, by - bh/2, bw, bh);
+      }
       ctx.fill();
       ctx.stroke();
 
       // Golden Cap
       ctx.fillStyle = '#d4af37';
       ctx.fillRect(bx - bw * 0.2, by - bh/2 - 35, bw * 0.4, 35);
-      ctx.strokeRect(bx - bw * 0.2, by - bh/2 - 35, bw * 0.4, 35);
+      if (ctx.strokeRect) {
+        ctx.strokeRect(bx - bw * 0.2, by - bh/2 - 35, bw * 0.4, 35);
+      }
 
     } else if (stylePreset === 'cyberpunk') {
       // Cyber Neon Background
@@ -153,13 +170,14 @@ export function UltraVisualStudio({ userCredits, setUserCredits, onOpenPricing }
       ctx.fillStyle = 'rgba(10, 10, 30, 0.92)';
       ctx.strokeStyle = '#00f0ff';
       ctx.lineWidth = 3;
-      ctx.shadowColor = '#00f0ff';
-      ctx.shadowBlur = 20;
       ctx.beginPath();
-      ctx.roundRect(w * 0.5 - w * 0.15, h * 0.5 - h * 0.18, w * 0.3, h * 0.36, 16);
+      if (ctx.roundRect) {
+        ctx.roundRect(w * 0.5 - w * 0.15, h * 0.5 - h * 0.18, w * 0.3, h * 0.36, 16);
+      } else {
+        ctx.rect(w * 0.5 - w * 0.15, h * 0.5 - h * 0.18, w * 0.3, h * 0.36);
+      }
       ctx.fill();
       ctx.stroke();
-      ctx.shadowBlur = 0;
 
     } else {
       // Studio Clean Minimalist
@@ -173,7 +191,11 @@ export function UltraVisualStudio({ userCredits, setUserCredits, onOpenPricing }
       // Studio Pedestal
       ctx.fillStyle = '#0f172a';
       ctx.beginPath();
-      ctx.roundRect(w * 0.5 - w * 0.18, h * 0.5, w * 0.36, h * 0.3, [16, 16, 4, 4]);
+      if (ctx.roundRect) {
+        ctx.roundRect(w * 0.5 - w * 0.18, h * 0.5, w * 0.36, h * 0.3, [16, 16, 4, 4]);
+      } else {
+        ctx.rect(w * 0.5 - w * 0.18, h * 0.5, w * 0.36, h * 0.3);
+      }
       ctx.fill();
     }
 
@@ -182,17 +204,18 @@ export function UltraVisualStudio({ userCredits, setUserCredits, onOpenPricing }
       // Top/Corner Discount Badge
       if (badgeText.trim()) {
         ctx.fillStyle = '#ef4444';
-        ctx.shadowColor = 'rgba(239, 68, 68, 0.5)';
-        ctx.shadowBlur = 12;
         ctx.beginPath();
-        ctx.roundRect(w * 0.06, h * 0.08, 160, 38, 12);
+        if (ctx.roundRect) {
+          ctx.roundRect(w * 0.06, h * 0.08, 170, 38, 12);
+        } else {
+          ctx.fillRect(w * 0.06, h * 0.08, 170, 38);
+        }
         ctx.fill();
-        ctx.shadowBlur = 0;
 
         ctx.fillStyle = '#ffffff';
         ctx.font = 'bold 15px Cairo, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText(badgeText, w * 0.06 + 80, h * 0.08 + 24);
+        ctx.fillText(badgeText, w * 0.06 + 85, h * 0.08 + 24);
       }
 
       // Headline Text Bar
@@ -201,7 +224,11 @@ export function UltraVisualStudio({ userCredits, setUserCredits, onOpenPricing }
         ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
         ctx.lineWidth = 1.5;
         ctx.beginPath();
-        ctx.roundRect(w * 0.06, h * 0.82, w * 0.88, 54, 16);
+        if (ctx.roundRect) {
+          ctx.roundRect(w * 0.06, h * 0.82, w * 0.88, 54, 16);
+        } else {
+          ctx.fillRect(w * 0.06, h * 0.82, w * 0.88, 54);
+        }
         ctx.fill();
         ctx.stroke();
 
@@ -232,13 +259,33 @@ export function UltraVisualStudio({ userCredits, setUserCredits, onOpenPricing }
     }
     setUserCredits((prev) => Math.max(0, prev - 10));
     setIsGenerating(true);
+    setAgentStep('🧠 وكيل التوجيه البصري: تحليل الإضاءة وزوايا التصوير...');
+
+    setTimeout(() => {
+      setAgentStep('🎨 وكيل التوليد والرسم: معالجة الانعكاسات وضبط دقة 8K...');
+    }, 300);
 
     setTimeout(() => {
       renderCanvas();
+      const canvas = canvasRef.current;
+      const dataUrl = canvas ? canvas.toDataURL('image/png') : null;
+
+      // Automatically archive into User's Deliverables Vault!
+      saveDeliverableToVault({
+        category: 'visual',
+        title: headlineText || promptInput.slice(0, 30),
+        summary: `تصميم إعلاني ${stylePreset} بنسبة ${aspectRatio}: ${promptInput}`,
+        inputs: { promptInput, stylePreset, aspectRatio, badgeText, headlineText },
+        outputs: { midjourneyPrompt, dallePrompt },
+        downloadType: 'png',
+        fileData: dataUrl,
+        agentTeam: ['وكيل التوجيه البصري 👁️', 'وكيل الرسم والإنتاج 🎨', 'وكيل الإخراج والتصدير 📦']
+      });
+
       setIsGenerating(false);
       confetti({ particleCount: 50, spread: 70, origin: { y: 0.7 } });
-      showToast('✨ تم توليد وتصميم الصورة الحقيقية بنجاح!');
-    }, 600);
+      showToast('✨ تم توليد التصميم وحفظه في مكتبة أعمالك بنجاح!');
+    }, 700);
   };
 
   const handleDownload = () => {
@@ -406,7 +453,7 @@ export function UltraVisualStudio({ userCredits, setUserCredits, onOpenPricing }
               {isGenerating ? (
                 <>
                   <Wand2 className="w-5 h-5 animate-spin text-amber-300" />
-                  <span>جاري معالجة ورسم الصورة بالذكاء الاصطناعي...</span>
+                  <span>{agentStep || 'جاري معالجة ورسم الصورة بالذكاء الاصطناعي...'}</span>
                 </>
               ) : (
                 <>
