@@ -32,6 +32,7 @@ export default function App() {
   const [mobileGuideOpen, setMobileGuideOpen] = useState(false);
   const [founderHubOpen, setFounderHubOpen] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authInitialMode, setAuthInitialMode] = useState('login');
 
   const handleOpenBlueprint = (sectionId = 'overview') => {
     setBlueprintSection(sectionId);
@@ -59,8 +60,14 @@ export default function App() {
     if (currentUser.role === 'owner') {
       setFounderHubOpen(true);
     } else {
+      setAuthInitialMode('admin_pin');
       setAuthModalOpen(true);
     }
+  };
+
+  const handleOpenUserAuth = () => {
+    setAuthInitialMode('login');
+    setAuthModalOpen(true);
   };
 
   const renderMainContent = () => (
@@ -159,7 +166,7 @@ export default function App() {
         currentUser={currentUser}
         onOpenPricing={scrollToPricing}
         onOpenFounderHub={handleFounderHubClick}
-        onOpenAuth={() => setAuthModalOpen(true)}
+        onOpenAuth={handleOpenUserAuth}
       />
 
       {/* Main View Area */}
@@ -215,6 +222,7 @@ export default function App() {
         currentUser={currentUser}
         setCurrentUser={setCurrentUser}
         onAdminUnlocked={() => setFounderHubOpen(true)}
+        initialMode={authInitialMode}
       />
 
       {/* Founder & Business Secrets Modal */}

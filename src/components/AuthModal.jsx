@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, Lock, Mail, User, ShieldCheck, Sparkles, Check, KeyRound, Crown } from 'lucide-react';
 
-export function AuthModal({ isOpen, onClose, currentUser, setCurrentUser, onAdminUnlocked }) {
-  const [authMode, setAuthMode] = useState('login'); // 'login' | 'register' | 'admin_pin'
+export function AuthModal({ isOpen, onClose, currentUser, setCurrentUser, onAdminUnlocked, initialMode = 'login' }) {
+  const [authMode, setAuthMode] = useState(initialMode); // 'login' | 'register' | 'admin_pin'
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
   const [adminPin, setAdminPin] = useState('');
   const [pinError, setPinError] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      setAuthMode(initialMode);
+      setPinError(false);
+      setAdminPin('');
+    }
+  }, [isOpen, initialMode]);
 
   if (!isOpen) return null;
 
